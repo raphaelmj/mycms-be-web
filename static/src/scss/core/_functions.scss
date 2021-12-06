@@ -1,0 +1,9 @@
+@function inRem($px: 16, $negative: plus) {
+  $v: ($px / 16);
+
+  @if ($negative==minus) {
+    @return -#{$v}rem;
+  } @else {
+    @return #{$v}rem;
+  }
+}

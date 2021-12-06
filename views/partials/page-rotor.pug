@@ -1,0 +1,30 @@
+if (page.slides.slideList && page.slides.imageTitle)
+    - const {imageTitle, slideList} = page.slides;
+    - const total = slideList.length;
+    - let rotorStyles = '';
+    each slide, i in slideList
+        - rotorStyles += '.slide-'+i+' {';
+        - rotorStyles += 'background: url("/images/loading.svg") center center no-repeat;';
+        - rotorStyles += 'background-size: 160px;';
+        - rotorStyles += '}';
+        - rotorStyles += '.slide-'+i+'.visible{';
+        - rotorStyles += 'background: url("'+slide.slide+'") bottom center no-repeat;';
+        - rotorStyles += 'background-size: cover;';
+        - rotorStyles += '}';
+    style !{rotorStyles}
+    .page-rotor(
+        class=contentViewSizeClass
+        ng-controller="PageRotorController as pgr"
+        ng-model="pageRotor"
+        ng-init="pageRotor={current:0, next:1,total: "+total+",stop: 0};pgr.init()"
+        hm-swipeLeft="pgr.onSwipeLeft($event)"
+        hm-swipeRight="pgr.onSwipeRight($event)"
+        )
+      if (imageTitle)
+        .image-title
+            img(src="/img/blank.gif" data-src=imageTitle data-srcset=imageTitle class="img-fluid lazy")
+      each slide, i in slideList
+        if (slide.logo)
+            .slide-logo(class='slide-logo-'+i+''+((i==0)?' active':''))
+                img(src="/img/blank.gif" data-src=slide.logo data-srcset=slide.logo class="lazy img-fluid")
+        .slide(class='slide-'+i+''+((i==0)?' active':'')+" lazy-background")

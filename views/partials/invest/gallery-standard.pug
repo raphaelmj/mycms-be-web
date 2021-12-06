@@ -1,0 +1,54 @@
+#rotor-gallery.flex.flex-d-column.flex-align-center.mb-5
+    .g-elements-container(ng-controller='GalleryRotorController as fcrtl')
+        .navi.prev
+            span.navi-bt.prev-bt(ng-class="prevC")
+                img.img-fluid.lazy(src="/img/blank.gif" data-src="/img/ikonka_arrow_left.png" data-srcset="/img/ikonka_arrow_left.png" alt="" ng-click="fcrtl.next()")
+        .navi.next
+            span.navi-bt.next-bt(ng-class="nextC")
+                img.img-fluid.lazy(src="/img/blank.gif" data-src="/img/ikonka_arrow_right.png" data-srcset="/img/ikonka_arrow_right.png" alt="" ng-click="fcrtl.prev()")
+        #g-elementsRotor.rotor-g-elements(hm-swipeLeft="fcrtl.onSwipeLeft($event)" hm-swipeRight="fcrtl.onSwipeRight($event)")
+            .tor(id="torHome")
+                each g,i in invest.gallery
+                    .g-element-slide(class="g-element-slide-"+i)
+                        if (g.type === 'image')
+                            img.lazy.img-fluid.gallery-r-element(
+                              src="/images/loading.svg"
+                              data-src=g.src
+                              data-srcset=g.src
+                              data-gallery-type=((g.type === 'movie') ? 'movie' : 'image')
+                              data-gallery-index=i
+                              data-gallery-id="investId"+invest.id
+                              data-size=g.sizeString
+                              data-image-path=g.src
+                              data-movie-id=g.movieSelector
+                            )
+                        else if (g.type === 'movie')
+                            img.lazy.img-fluid(
+                                src="/images/loading.svg"
+                                data-src=g.src
+                                data-srcset=g.src
+                                data-gallery-type=((g.type === 'movie') ? 'movie' : 'image')
+                                data-gallery-index=i
+                                data-gallery-id="investId" + invest.id
+                                data-size=g.sizeString
+                                data-image-path=g.src
+                                data-movie-id=g.movieSelector
+                            )
+                            .el-play.gallery-r-element(
+                                data-gallery-type=((g.type === 'movie') ? 'movie' : 'image')
+                                data-gallery-index=i
+                                data-gallery-id="investId" + invest.id
+                                data-size=g.sizeString
+                                data-image-path=g.src
+                                data-movie-id=g.movieSelector
+                            )
+                                img(
+                                    src="/img/play.svg"
+                                    data-gallery-type=((g.type === 'movie') ? 'movie' : 'image')
+                                    data-gallery-index=i
+                                    data-gallery-id="investId" + invest.id
+                                    data-size=g.sizeString
+                                    data-image-path=g.src
+                                    data-movie-id=g.movieSelector
+                                    )
+

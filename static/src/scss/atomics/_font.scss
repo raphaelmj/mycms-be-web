@@ -1,0 +1,30 @@
+.fw-xlight{
+  font-weight: 200;
+}
+
+.fw-light{
+  font-weight:300;
+}
+
+.fw-regular{
+  font-weight:400;
+}
+
+.fw-semibold{
+  font-weight:600;
+}
+
+.fw-bold{
+  font-weight:700;
+}
+
+
+@for $i from 10 through 48 {
+  .fs-#{$i} {
+    font-size: inRem($i);
+  }
+}
+
+.text-uppercase{
+  text-transform: uppercase;
+}

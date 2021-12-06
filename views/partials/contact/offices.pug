@@ -1,0 +1,43 @@
+include contact-groups-mixin
+.offices.on-white(class="link-on-color-"+pageColor.alias)
+    each office, i in departmentOffices
+        .office-row(id=office.data.alias)
+            .left-col
+                .info
+                    .image
+                        img(src="/img/invest_ico.png" class="img-fluid")
+                    .data
+                        h3.office-title.on-white(class="font-on-color-"+pageColor.alias) #{office.data.title}
+                        .sub-title.flex.w-100
+                            h4.sub-title.on-white(class="font-on-color-"+pageColor.alias)
+                                | Biuro sprzedaży #{office.data.subTitle}
+                                br
+                                | !{office.data.address}
+                            .phones
+                                each p in [...office.data.phones]
+                                    .phone-el.link-el
+                                        a(href="tel:"+p) #{p}
+                        .emails
+                            each p in [...office.data.emails]
+                                .email-el.link-el
+                                    a(href="mailto:" + p) #{p}
+                +openHours(office.data.hours, pageColor)
+                .contacts
+                    +contactGroups(office.contactGroups, 2, true)
+
+            .right-col
+                if (office.data.mapFiles)
+                    if (office.data.mapFiles.moreFile && office.data.mapFiles.lessFile)
+                        style.
+                            .office-map-#{i} {
+                                background: url(#{office.data.mapFiles.lessFile}) center top no-repeat;
+                                background-size: auto 260px;
+                            }
+                            @media (max-width: 991.98px) {
+                                .office-map-#{i} {
+                                    background-size: auto 320px;
+                                }
+                            }
+                        .office-map.click-open(class="office-map-"+i data-size=office.data.mapFiles.moreFile.sizeString data-image-src=office.data.mapFiles.moreFile.src)
+
+

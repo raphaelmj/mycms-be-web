@@ -1,0 +1,49 @@
+- let pageColor = page?.pageColor || parentPage?.pageColor;
+- const isContextTop = (contextMenuTop.length > 0);
+- const isContextBottom = (contextMenuBottom.length > 0);
+- let contentViewSizeClass = 'normal';
+if (isContextTop && isContextBottom)
+    - contentViewSizeClass = 'full-crop';
+else if (isContextTop)
+    - contentViewSizeClass = 'top-crop';
+else if (isContextBottom)
+    - contentViewSizeClass = 'bottom-crop';
+if (data.view === 'dynamic/variant')
+  - pageColor = data?.dynamicData?.invests?.currentVariant?.color || pageColor;
+
+- let activePageId;
+- let activeVariantId;
+- let activeDepartmentId
+- if (data.isPage) {
+    - activePageId = page.id;
+- } else {
+    - if (data.view === 'dynamic/variant') {
+        - activeVariantId = data.dynamicData.invests.currentVariant.id;
+    - } else if (data.view === 'dynamic/variant/invest') {
+        - activeVariantId = data.dynamicData.invest.parentVariant.id;
+    - } else if (data.view === 'dynamic/department') {
+        - activeDepartmentId = data.dynamicData.departmentData.data.department.id;
+    - } else if (data.view === 'dynamic/article') {
+        - activePageId = parentPage.id;
+    - } else if (data.view === 'dynamic/notice') {
+        - activePageId = parentPage.id;
+    - }
+- }
+
+- const fitToHeightClass = (data.view === 'invests' || data.view === 'main') ? 'fit-to-height' : '';
+
+- let containerTypeClass = 'container-small';
+- let containerType = 'standard';
+- if ((data.view === 'dynamic/department' || data.view === 'contact' || leftPages?.length > 0) && !page?.slides?.slideList?.length) {
+    - containerTypeClass = 'container-full with-left-column';
+    - containerType = 'with-left'
+- }
+- if (page?.slides?.slideList?.length) {
+    - containerTypeClass = 'container-full';
+    - containerType = 'full';
+- }
+
+- let customContainerBg = '';
+- if (data.view === 'notices' || data.view === 'dynamic/notice') {
+    - customContainerBg = 'notice-bg';
+- }

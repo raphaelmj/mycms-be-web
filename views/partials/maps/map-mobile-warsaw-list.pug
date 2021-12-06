@@ -1,0 +1,18 @@
+.row-map-mobile-list.warsaw
+    .col-full-list
+        .head-view
+            h2 Inwestycje w sprzedaży
+        .elements-view
+            each el,i in warsawGroup.sell
+                .ev-element(class=el.status)
+                    h5 !{el.name}
+                    .desc-address !{el.address}
+                    a(href=el.url target="_blank")
+        .head-view
+            h2 Inwestycje ZAKOŃCZONE:
+        .elements-view
+            each el,i in warsawGroup.end
+                .ev-element(class=el.status)
+                    h5 !{el.name}
+                    .desc-address !{el.address}
+                    a(href=el.url target="_blank")

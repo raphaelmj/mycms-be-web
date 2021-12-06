@@ -1,0 +1,23 @@
+.cont-maps
+    .main_maps_about
+        script.
+            const mapPolandData = '!{JSON.stringify(polandMap)}';
+            const mapWarsawData = '!{JSON.stringify(warsawMap)}';
+        .head-of-title
+            .head-text Inwestycje handlowe W POLSCE
+            .head-arrows
+                img(src="/images/arrow_blue.svg")
+        include map-mobile-poland
+        include map-mobile-list-poland
+        include map-poland
+.beam-white
+.cont-maps
+    .main_maps_about
+        .head-of-title.margin-top-size
+            .head-text
+                | Inwestycje mieszkaniowe
+            .head-arrows
+                img(src='/images/arrow_blue.svg' alt='')
+        include map-mobile-warsaw
+        include map-mobile-warsaw-list
+        include map-warsaw

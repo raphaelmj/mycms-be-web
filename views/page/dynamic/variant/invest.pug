@@ -1,0 +1,9 @@
+extends ../../../layouts/page
+block page-content
+    .content.pt-6.pb-6(class=((containerType === 'with-left') ? 'container-small default-align' : ''))
+        include ../../../partials/breadcrumbs
+        - const parentVariant = data.dynamicData.invest.parentVariant;
+        if (parentVariant.params.presentation === 'default')
+            include ../../../partials/invest/default-invest
+        else
+            include ../../../partials/invest/table-invest

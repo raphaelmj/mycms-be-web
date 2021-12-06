@@ -1,0 +1,23 @@
+extends ../layouts/page
+block page-content
+    - const alias = page?.category?.alias;
+    .content.pt-6.pb-6(class=((containerType === 'with-left') ? 'container-small default-align' : '') id=alias)
+        include ../partials/breadcrumbs
+        h2.page-title.on-white(class="font-on-color-"+pageColor.alias) #{page.title}
+        .articles-blog-rows.w-100
+            each article in data.pageTypeData.articles.results
+                .article-row.w-100
+                    .article-image
+                        img(src="/img/blank.gif" data-src=article.image data-srcset=article.image class="lazy")
+                    .article-intro.flex.flex-d-column.flex-justify-content-between.pl-8
+                        .article-data-info
+                            if (article.publishedAt)
+                                span.article-date.fs-14.mt-2
+                                    +dateStringPl(article.publishedAt)
+                            h2.article-title.mt-2
+                                a.on-white(href=page.path+'/'+article.alias class="font-on-color-"+pageColor.alias) #{article.title}
+                            .article-text.on-white.text-content(class="font-on-color-"+pageColor.alias) !{article.short}
+                        .article-more
+                            a.on-white(href=page.path+'/'+article.alias class="font-on-color-"+pageColor.alias) więcej >>
+        .pagination
+            +pagination(paginationConfig.limit, data.pageTypeData.articles.total, data.pageTypeData.articles.page, page.path, alias)

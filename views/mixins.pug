@@ -1,0 +1,170 @@
+mixin dateStringNames(date=new Date())
+    - var months = ['Stycznia','Lutego','Marca', 'Kwietnia', 'Maja', 'Czerwca','Lipca','Sierpnia','Września','Października','Listopada','Grudnia']
+    - var d = date.getDate()
+    - var m = date.getMonth()
+    - var y = date.getFullYear()
+    if(d>9)
+        | #{d}&nbsp;
+    else
+        | #{d}&nbsp;
+
+    | #{months[m]}&nbsp;
+    | #{y}
+
+mixin dateStringPl(date=new Date())
+    - var d = date.getDate();
+    - var m = date.getMonth();
+    - var y = date.getFullYear();
+    - let dateS = (d<9)?d:d;
+    - dateS += (m>9)?('.'+(m+1)):('.0'+(m+1));
+    - dateS += '.'+y;
+    | #{dateS}
+
+mixin pagination(limit, total, current = 1, path, anchor)
+    - const pags = [];
+    - let manyPags = {};
+    - const minPages = 15;
+    - const visibleLength = 3;
+    - const totalPags = Math.ceil(total/limit);
+    - const isMany = totalPags > minPages;
+    - const isValidPage = current > 0;
+    - let isSecondHalf = false;
+
+    - if (isValidPage) {
+        - if (!isMany) {
+            - for(let i=0;i<totalPags;i++) {
+                - if(current === (i+1)) {
+                    - pags.push({nr:(i+1),active:true});
+                - } else {
+                    - pags.push({nr:(i+1),active:false});
+                - }
+            - }
+        - } else {
+            - const halfPage = Math.ceil(totalPags / 2);
+            - isSecondHalf = halfPage < current;
+            - manyPags.left = []
+            - manyPags.right = []
+            - if (isSecondHalf) {
+                - if (current > (totalPags - visibleLength)) {
+                    - for (let i = 0; i < visibleLength; i++) {
+                        - manyPags.left.push(i + 1);
+                    - }
+                    - for (let i = 0; i < visibleLength; i++) {
+                        - if ((current + i) <= totalPags) {
+                            - manyPags.right.push(current + i);
+                        - }
+                    - }
+                    - let emptyCount = visibleLength - manyPags.right.length;
+                    - let first = manyPags.right[0]
+                    - for (let i = 1; i <= emptyCount; i++) {
+                        - manyPags.right.unshift(first - i);
+                    - }
+                - } else {
+                    - for (let i = 0; i < visibleLength; i++) {
+                        - manyPags.left.push(i + 1);
+                    - }
+                    - for (let i = 0; i < visibleLength; i++) {
+                        - manyPags.right.push(current + i);
+                    - }
+                - }
+                - manyPags.middle = manyPags.right[0] - 1;
+            - } else {
+                - if (current >= (halfPage - visibleLength)) {
+                    - let ileft = current;
+                    - for (let i = 0; i < visibleLength; i++) {
+                        - manyPags.left.push(ileft);
+                        - ileft--;
+                    - }
+                    - manyPags.left.reverse();
+                    - let iright = 1;
+                    - for (let i = totalPags; i > (totalPags - visibleLength); i--) {
+                        - manyPags.right.push(i);
+                        - iright++;
+                    - }
+                    - manyPags.right.reverse();
+                - } else {
+                    - let ileft = 1;
+                    - for (let i = 0; i < visibleLength; i++) {
+                        - manyPags.left.push(current + i);
+                        - ileft++;
+                    - }
+                    - let iright = 1;
+                    - for (let i = totalPags; i > (totalPags - visibleLength); i--) {
+                        - manyPags.right.push(i);
+                        - iright++;
+                    - }
+                    - manyPags.right.reverse();
+                - }
+                - manyPags.middle = manyPags.left[manyPags.left.length - 1] + 1;
+            - }
+        - }
+    - }
+
+    if(total>limit && isValidPage)
+        ul.pagination-ul
+            if(current != 1)
+                li
+                    a(href=path+"?page="+(parseInt(current)-1)+((anchor)?'#'+anchor:'')) <<
+                li
+                    a(href=path + "?page=" + (1) + ((anchor) ? '#' + anchor : '')) pierwsza
+            if (!isMany)
+                each p in pags
+                    li(class=(p.active)?"active":"")
+                        a(href=path+"?page="+p.nr+((anchor)?'#'+anchor:'')) #{p.nr}
+            else
+                each p in manyPags.left
+                    li(class=(p === current) ? "active" : "")
+                        a(href=path + "?page=" + p + ((anchor) ? '#' + anchor : '')) #{p}
+                li
+                    a(href=path + "?page=" + manyPags.middle + ((anchor) ? '#' + anchor : '')) ...
+                each p in manyPags.right
+                    li(class=(p === current) ? "active" : "")
+                        a(href=path + "?page=" + p + ((anchor) ? '#' + anchor : '')) #{p}
+
+            if(current != totalPags)
+                li
+                    a(href=path+"?page="+(totalPags)+((anchor)?'#'+anchor:'')) ostatnia
+                li
+                    a(href=path+"?page="+(parseInt(current)+1)+((anchor)?'#'+anchor:'')) >>
+
+
+
+mixin emailsAndPhones(emails = [], phones = [], pageColor)
+    if (emails.length > 0)
+        .contact-links-row.emails-row
+          each email in emails
+              .email-el.link-el
+                  a(href="mailto:" + email class="on-white font-on-color-"+pageColor.alias) #{email}
+    if (phones.length > 0)
+        .contact-links-row.phones-row
+          each phone in phones
+              .phone-el.link-el
+                  a(href="tel:" + phone class = "on-white font-on-color-" + pageColor.alias) #{phone}
+
+mixin emailsAndPhonesBigger(emails = [], phones = [], pageColor)
+    if (emails.length > 0)
+        .contact-links-row.emails-row.bigger
+          each email in emails
+              .email-el.link-el
+                  a(href="mailto:" + email class="on-white font-on-color-"+pageColor.alias) #{email}
+    if (phones.length > 0)
+        .contact-links-row.phones-row.bigger
+          each phone in phones
+              .phone-el.link-el
+                  a(href="tel:" + phone class = "on-white font-on-color-" + pageColor.alias) #{phone}
+
+
+mixin openHours(hours = [], pageColor)
+    if (hours.length > 0)
+        .open-hours
+            h4.on-white.mb-2(class="font-on-color-" + pageColor.alias) Godziny otwarcia
+            each h in hours
+              .hour-row.mb-1
+                  | !{h}
+
+
+mixin customPageFilterLink(id, path, name, isFilterActive = false)
+    if (isFilterActive && id === 6)
+        a(href="https://npark.pl/") !{name}
+    else
+        a(href=path) !{name}

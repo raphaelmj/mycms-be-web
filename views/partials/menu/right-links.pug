@@ -1,0 +1,17 @@
+- let links = [];
+- if (page) {
+    - links = page.rightLinks;
+- }
+- if (parentPage) {
+    - links = parentPage.rightLinks;
+- }
+- const iconSuffix = (pageColor.alias === 'yellow') ? '-dark.png' : '-white.png';
+if (links && links.length > 0)
+  .right-links
+      each link in links
+        .right-link.flex.flex-align-center.mb-3.w-100
+            .beam-wrap(class="wrap-left-"+pageColor.alias)
+            .beam-icon.flex.flex-align-center.flex-justify-content-center(class="bg-"+pageColor.alias)
+                img(src="/img/blank32.gif" data-src=link.icon+iconSuffix data-srcset=link.icon+iconSuffix class="lazy")
+            .beam-content.flex.flex-align-center.w-100.pl-1.pt-3.pb-3.pr-1(class="bg-"+pageColor.alias+" font-on-color-"+pageColor.alias) !{link.name}
+            a(href=link.link target=link.target)

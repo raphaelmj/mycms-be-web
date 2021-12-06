@@ -1,0 +1,15 @@
+extends ../layouts/page
+include ../partials/contact/contact-groups-mixin
+block page-content
+    .content.pt-6.pb-6(class=((containerType === 'with-left') ? 'container-small default-align' : ''))
+        include ../partials/breadcrumbs
+        if (data.pageTypeData.pageContact.mainOffice)
+            include ../partials/main-office
+        else if (data.pageTypeData.pageContact.mainDepartmentData)
+            h2.page-title.on-white(class="font-on-color-"+pageColor.alias) #{data.pageTypeData.pageContact.mainDepartmentData.department.name}
+        else
+            h2.page-title.on-white(class="font-on-color-"+pageColor.alias) #{page.title}
+        if (data.pageTypeData.pageContact.mainDepartmentData)
+            if (data.pageTypeData.pageContact.mainDepartmentData.contactGroups.length > 0)
+                .mt-6
+                    +contactGroups(data.pageTypeData.pageContact.mainDepartmentData.contactGroups)

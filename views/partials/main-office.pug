@@ -1,0 +1,16 @@
+- const mainOffice = data.pageTypeData.pageContact.mainOffice;
+h2.page-title.on-white(class="font-on-color-"+pageColor.alias) #{mainOffice.title}
+.equal-grid.columns-1.columns-large-2.spaces-2
+    .column
+        +emailsAndPhones(mainOffice.emails, mainOffice.phones, pageColor)
+        +openHours(mainOffice.hours, pageColor)
+    .column
+        .address.mb-2.format-html.on-white(class="font-on-color-"+pageColor.alias) !{mainOffice.address}
+        if (mainOffice.description && mainOffice.description != '')
+          .description.format-html.mb-2.on-white(class="font-on-color-"+pageColor.alias) !{mainOffice.description}
+if (mainOffice.mapFiles)
+    if (mainOffice.mapFiles.lessFile && mainOffice.mapFiles.moreFile)
+        .equal-grid.columns-1
+            .column
+                img.click-open(src="/img/blank.gif" data-src=mainOffice.mapFiles.lessFile data-srcset=mainOffice.mapFiles.lessFile class="img-fluid lazy" data-image-src=mainOffice.mapFiles.moreFile.src data-size=mainOffice.mapFiles.moreFile.sizeString)
+

@@ -1,0 +1,19 @@
+if (popup)
+  if (popup.popupData)
+  - const popupData = popup.popupData;
+  - const init = "config={popupId:"+popup.id+",orient:'"+popupData.image.orientation+"'};popupCtrl.initData()";
+    .popup.before-load(
+      ng-controller="PopupController as popupCtrl"
+      ng-model="config"
+      ng-init=init
+      ng-class="loadState"
+    )
+      .overload-popup-base.hidden-pop-up#popupBase(ng-click="popupCtrl.hidePopup()")
+      .pop-up-content-base.hidden-pop-up#popupContentBase(class=popupData.image.orientation)
+        .inside-popup
+          if(popupData.hasLink)
+            a(href=popupData.link target=popupData.target)
+              img(src=popupData.image.path class="image-popup")
+          else
+            img(src=popupData.image.path class="image-popup")
+          button(type="button" ng-click="popupCtrl.hidePopup()") X

@@ -1,0 +1,10 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { ImageFormat } from '../types/image-format';
+export class PageSlideDto {
+  @ApiProperty()
+  croppedImage: string;
+  @ApiProperty()
+  imageFormat: ImageFormat;
+  @ApiProperty()
+  id: number;
+}

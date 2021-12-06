@@ -1,0 +1,17 @@
+extends ../layouts/page
+block page-content
+    .content.pt-6.pb-6(class=((containerType === 'with-left') ? 'container-small default-align' : '') id=alias)
+        include ../partials/breadcrumbs
+        h2.page-title.on-white.mb-4.important(class="font-on-color-"+pageColor.alias+" arrows-"+pageColor.alias) #{page.title}
+        .about-article.equal-grid.columns-1.columns-medium-1.columns-large-2.spaces-5.format-html.blue-font
+            .column
+                | !{data.pageTypeData.article.leftContent}
+                .images-about.flex.flex-align-center
+                    img(src="/img/PZFD_logo_WWW_GRAY.png" class="img-fluid")
+                    img(src="/img/PRCH_Member_WWW_GRAY.png" class="img-fluid")
+            .column
+                | !{data.pageTypeData.article.rightContent}
+            .column.under-image.arrows.flex.flex-align-center
+                img(src="/img/strzalki.png" class="img-fluid")
+            .column.under-image.flex.flex-align-center
+                img(src="/img/haslo_na_pewno.png" class="img-fluid")

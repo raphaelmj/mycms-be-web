@@ -1,0 +1,22 @@
+if (contextMenuBottom.length>0)
+    include bottom-context
+.beam-menu.bottom-menu
+    .container-left-space.flex.flex-align-center.default-align
+        .right-col.flex.flex-align-center
+            .copy.flex.flex-align-center.mr-2.text-nowrap
+                | DEVELOPED BY NAPOLLO © 2018
+                =" "
+            .logos.flex.flex-align-center.mr-2
+                span.label.mr-2 CZŁONEK
+                =" "
+                img(src="/img/loga_stopka_c.png" class="img-fluid")
+                img(src="/img/loga_stopka_prch.png" class="img-fluid")
+                =" "
+                span.label.ml-2 POLSKA RADA CENTRÓW HANDLOWYCH
+        .left-col
+            ul
+              each p in staticMenus.bottom
+                - let title = (p.linkTitle?.length) ? p.linkTitle : p.title;
+                - title = title.replace(/(<([^>]+)>)/gi, " ");
+                li(class=((p.id === activePageId) ? 'active' : ''))
+                    a(href=p.path) #{title}

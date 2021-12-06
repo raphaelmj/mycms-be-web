@@ -1,0 +1,211 @@
+body {
+  @include fontRegular();
+  color: $fontColor;
+}
+
+a{
+  color: $black;
+}
+
+h2.page-title {
+  @include fontSemiBold(inRem(36));
+  text-transform: uppercase;
+  margin-bottom: inRem(24);
+
+  &.smaller-font {
+    @include fontSemiBold(inRem(26));
+  }
+
+  @include xxsmall {
+    @include fontSemiBold(inRem(30));
+  }
+
+}
+
+h2.category-title {
+  @include fontSemiBold(inRem(26));
+  text-transform: uppercase;
+  margin-bottom: inRem(24);
+
+  //@include xsmall(down) {
+  //  text-align: center;
+  //}
+}
+
+h2.article-title {
+  @include fontBold(inRem(26));
+}
+
+.with-arrows {
+  min-height: inRem(60);
+  &.arrows-blue {
+    background: url("../../images/strzalki.png") top right no-repeat;
+    background-size: #{inRem(400)} auto;
+    padding-right: inRem(420);
+
+    @include small(down) {
+      background-size: #{inRem(260)} auto;
+      padding-right: inRem(280);
+    }
+
+    @include xsmall(down) {
+      background: none;
+      padding-right: 0;
+    }
+  }
+}
+
+h2.notice-title {
+  @include fontSemiBold(inRem(26));
+  @include xxsmall {
+    @include fontBold(inRem(20));
+  }
+}
+
+//$icons: "blue" $blueDark, "yellow" $fontColor, "pink" $fontColor;
+//
+//@each $alias, $fColor in $icons {
+//  div.#{$alias} {
+//    background-color: $fColor;
+//  }
+//}
+
+.text-content {
+  line-height: inRem(24);
+}
+
+.link-on-color-yellow{
+  a{
+    color: $fontColor;
+  }
+
+  &.on-left-pages {
+    a {
+      color: $fontColor;
+    }
+  }
+
+  &.on-breadcrumbs {
+    a {
+      color: $fontColor;
+    }
+  }
+}
+
+.link-on-color-pink {
+  a{
+    color: $white;
+  }
+
+  &.on-left-pages {
+    a {
+      color: $fontColor;
+    }
+  }
+
+  &.on-breadcrumbs {
+    a {
+      color: $fontColor;
+    }
+  }
+}
+
+.link-on-color-blue{
+  a{
+    color: $white;
+  }
+
+  &.on-left-pages {
+    a {
+      color: $blueDark;
+    }
+  }
+
+  &.on-breadcrumbs {
+    a {
+      color: $blueDark;
+    }
+  }
+
+  &.on-white {
+    a {
+      color: $blueDark;
+    }
+  }
+}
+
+
+.font-on-color-yellow{
+  color: $fontColor;
+
+  &.on-breadcrumbs {
+    color: $fontColor;
+  }
+
+  &.on-white {
+    color: $fontColor;
+  }
+
+  &.colorize {
+    color: $fontColor;
+  }
+}
+
+.font-on-color-pink {
+  color: $white;
+
+  &.on-breadcrumbs {
+    color: $fontColor;
+  }
+
+  &.on-white {
+    color: $fontColor;
+  }
+
+  &.colorize {
+    color: $pink;
+  }
+}
+
+.font-on-color-blue{
+  color: $white;
+
+  &.on-breadcrumbs {
+      color: $blueDark;
+  }
+
+  &.on-white {
+    color: $blueDark;
+  }
+
+  &.colorize {
+    color: $blueDark;
+  }
+}
+
+
+
+.border-bottom-yellow{
+  border-bottom: 2px solid #{$yellow};
+}
+
+.border-bottom-pink {
+  border-bottom: 2px solid #{$pink};
+}
+
+.border-bottom-blue{
+  border-bottom: 2px solid #{$blueDark};
+}
+
+.border-bottom-gray-slim{
+  border-bottom: 1px solid #{$grayLight};
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+h2.error-404-label {
+  color: $blue;
+  @include fontBold(inRem(50));
+}

@@ -1,0 +1,22 @@
+extends ../../layouts/page
+block page-content
+    - const article = data.dynamicData.article.articleData;
+    .content.pt-6.pb-6(class=((containerType === 'with-left') ? 'container-small default-align' : ''))
+        include ../../partials/breadcrumbs
+        if (parentPage.category)
+            h2.category-title.on-white.mt-8(class="font-on-color-"+pageColor.alias) #{parentPage.category.name}
+            .blog-article.flex.mt-4
+                .col-left
+                    img(src="/img/blank.gif" data-src=article.image data-srcset=article.image class="lazy w-100 img-fluid")
+                .col-right
+                    .article-data-info
+                        if (article.publishedAt)
+                            span.article-date.fs-14.mt-2
+                                +dateStringPl(article.publishedAt)
+                    h2.article-title.on-white.mt-4.mb-4(class="font-on-color-"+pageColor.alias) #{article.title}
+                    .article-content.format-html
+                        | !{article.content}
+
+
+
+

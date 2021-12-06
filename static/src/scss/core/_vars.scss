@@ -1,0 +1,16 @@
+$beam_menu_height: 40;
+$context_menu_height: 74;
+$wrap_context_beam_width: 45;
+$mobile_menu_height: 60;
+
+//containers width
+$default_container: 92%;
+$default_container_margin: 4%;
+$problem_container: 920px;
+$problem_container_margin: calc(((100% - 920px) / 2)  - #{inRem($wrap_context_beam_width)});
+$large_container: 1080px;
+$large_container_margin: calc(((100% - 1080px) / 2) - #{inRem($wrap_context_beam_width)});
+$xlarge_container: 1280px;
+$xlarge_container_margin: calc(((100% - 1280px) / 2) - #{inRem($wrap_context_beam_width)});
+$xxlarge_container: 1440px;
+$xxlarge_container_margin: calc(((100% - 1440px) / 2) - #{inRem($wrap_context_beam_width)});

@@ -1,0 +1,40 @@
+.context-menu-beam.context-menu-beam__top.flex.flex-d-row.flex-align-center(class="bg-"+pageColor.alias)
+    .arrow-back-history.flex.flex-d-row.flex-align-center
+        a(href="#" onclick="event.preventDefault();window.history.go(-1); return false;")
+            if (pageColor.alias === 'yellow')
+                img(src="/img/strzalka_nawigacja_grey.png" class="img-fluid")
+            else
+                img(src="/img/strzalka_nawigacja_white.png" class="img-fluid")
+    .menu-content.flex.flex-d-row.flex-align-center.container-small
+        .logo-left
+            a(href="/")
+                if (pageColor.alias === 'yellow')
+                    img(src="/img/logo_Napollo_menu_zolte.png" class="img-fluid")
+                else
+                    img(src="/img/uni_logo_Napollo.png" class="img-fluid")
+        .links.flex.flex-d-row(class="link-on-color-"+pageColor.alias)
+            ul.flex.flex-d-row.flex-align-center(class=((contextMenuTop.length < 3) ? 'less-then-3' : ''))
+                each link in contextMenuTop
+                    if (data.isPage)
+                        li(class=((activePageId === link.id && link.type === 'page') ? 'active' : ''))
+                            +customPageFilterLink(link.id, link.path, link.name, nparkSpecial && link.type === 'page')
+                    else if (data.view === 'dynamic/variant')
+                        li(class=((activeVariantId === link.id && link.type === 'variant') ? 'active' : ''))
+                            +customPageFilterLink(link.id, link.path, link.name, nparkSpecial && link.type === 'page')
+                    else if (data.view === 'dynamic/department')
+                        li(class=((activeDepartmentId === link.id && link.type === 'department') ? 'active' : ''))
+                            +customPageFilterLink(link.id, link.path, link.name, nparkSpecial && link.type === 'page')
+                    else if (data.view === 'dynamic/article')
+                        li(class=((activePageId === link.id) ? 'active' : ''))
+                            +customPageFilterLink(link.id, link.path, link.name, nparkSpecial && link.type === 'page')
+                    else if (data.view === 'dynamic/variant/invest')
+                        li(class=((activeVariantId === link.id && link.type === 'variant') ? 'active' : ''))
+                            +customPageFilterLink(link.id, link.path, link.name, nparkSpecial && link.type === 'page')
+                    else
+                        li
+                            +customPageFilterLink(link.id, link.path, link.name, nparkSpecial && link.type === 'page')
+
+
+
+
+

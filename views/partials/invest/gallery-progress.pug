@@ -1,0 +1,19 @@
+#rotor-gallery.flex.flex-d-column.flex-align-center.mb-5
+    .g-elements-container(ng-controller='GalleryRotorController as fcrtl')
+        .navi.prev
+            span.navi-bt.prev-bt(ng-class="prevC")
+                img.img-fluid.lazy(src="/img/blank.gif" data-src="/img/ikonka_arrow_left.png" data-srcset="/img/ikonka_arrow_left.png" alt="" ng-click="fcrtl.next()")
+        .navi.next
+            span.navi-bt.next-bt(ng-class="nextC")
+                img.img-fluid.lazy(src="/img/blank.gif" data-src="/img/ikonka_arrow_right.png" data-srcset="/img/ikonka_arrow_right.png" alt="" ng-click="fcrtl.prev()")
+        #g-elementsRotor.rotor-g-elements(hm-swipeLeft="fcrtl.onSwipeLeft($event)" hm-swipeRight="fcrtl.onSwipeRight($event)")
+            .tor(id="torHome")
+                each g,i in invest.progressGallery
+                    .g-element-slide.gallery-collection(class="g-element-slide-"+i)
+                        img.lazy.img-fluid.gallery-collection(
+                          src="/img/blank.gif"
+                          data-src=g.imageThumb
+                          data-srcset=g.imageThumb
+                        )
+                        if (g.name)
+                            .gallery-title.gallery-collection(data-collection=JSON.stringify(g)) #{g.name}

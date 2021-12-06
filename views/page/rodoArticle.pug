@@ -1,0 +1,7 @@
+extends ../layouts/page
+block page-content
+    .content.pt-6(class=((containerType === 'with-left') ? 'container-small default-align' : '') id=alias)
+        include ../partials/breadcrumbs
+        h2.page-title.on-white.mb-4.important(class="font-on-color-"+pageColor.alias+" arrows-"+pageColor.alias) #{page.title}
+        .rodo-content.format-html.pb-4
+            | !{data.pageTypeData.article.content}

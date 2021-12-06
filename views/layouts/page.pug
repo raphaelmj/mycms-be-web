@@ -1,0 +1,10 @@
+extends main
+block content
+    .view-container(class=contentViewSizeClass+' '+fitToHeightClass+' '+customContainerBg+' '+((data.view === 'aboutArticleMapsView') ? 'no-min-height' : ''))
+        div(class=containerTypeClass)
+            if (containerType === 'with-left')
+                .pt-6.left-column.flex.flex-d-column
+                    include ../partials/menu/left-pages
+            block page-content
+    if (data.view === 'aboutArticleMapsView')
+        include ../partials/maps/map-main

@@ -1,0 +1,18 @@
+h2.page-title.on-white.mt-8(class="font-on-color-"+pageColor.alias) #{data.dynamicData.invests.currentVariant.name}
+- let currentVariant = data.dynamicData.invests.currentVariant
+if (currentVariant.params.showDescriptions)
+    .equal-grid.columns-1.columns-large-2.spaces-5
+        .column.format-html.mb-8.important
+            | !{currentVariant.leftDescription}
+        .column.format-html.mb-8.important
+            | !{currentVariant.rightDescription}
+if (currentVariant.params.showLink && currentVariant.link && currentVariant.link.link != '')
+    .equal-grid.columns-1.columns-large-2.spaces-5
+        .column.mb-4.important
+            //.over-link.mt-4
+            //    b Zapraszamy na stronę www inwestycji
+            a.link-invest-site.flex.w-100.flex-align-center.flex-justify-content-between.mt-2(href=currentVariant.link.link target="_blank" class="wrap-link-" + pageColor.alias)
+                span.link-text.w-100.text-center #{((currentVariant.link.name && currentVariant.link.name != '') ? currentVariant.link.name : currentVariant.link.link)}
+                span.wrap-on
+if (currentVariant.params.showBanner)
+    img(src=currentVariant.banner class="img-fluid w-100 mb-16")

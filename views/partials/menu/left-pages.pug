@@ -1,0 +1,19 @@
+ul.left-pages.on-left-pages(class="link-on-color-" + pageColor.alias)
+    each p in leftPages
+        - let title = (p.linkTitle?.length) ? p.linkTitle : p.title
+        li(class=((p.id === activePageId) ? 'active' : ''))
+            a(href=p.path) #{title}
+    if (data.view === 'contact')
+        if (data.pageTypeData.pageContact.mainDepartmentData)
+            li(class="active")
+                a(href=page.path) #{data.pageTypeData.pageContact.mainDepartmentData.department.name}
+        each d in data.pageTypeData.pageContact.otherDepartments
+            li
+                a(href=page.path+'/'+d.alias) #{d.name}
+    if (data.view === 'dynamic/department')
+        if (data.dynamicData.departmentData.mainDepartment)
+            li
+                a(href=parentPage.path) #{data.dynamicData.departmentData.mainDepartment.name}
+        each d in data.dynamicData.departmentData.otherDepartments
+            li(class=((activeDepartmentId === d.id) ? "active" : ""))
+                a(href=parentPage.path + '/' + d.alias) #{d.name}

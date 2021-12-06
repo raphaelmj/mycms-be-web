@@ -1,0 +1,15 @@
+.context-menu-beam.context-menu-beam__top.flex.flex-d-row.flex-align-center(class="bg-"+pageColor.alias)
+    .arrow-back-history.flex.flex-d-row.flex-align-center
+        a(href="#" onclick="event.preventDefault();window.history.go(-1); return false;")
+            if (pageColor.alias === 'yellow')
+                img(src="/img/strzalka_nawigacja_grey.png" class="img-fluid")
+            else
+                img(src="/img/strzalka_nawigacja_white.png" class="img-fluid")
+    .menu-content.flex.flex-d-row.flex-align-center.container-small
+        .logo-left
+            a(href="/")
+                if (pageColor.alias === 'yellow')
+                    img(src="/img/logo_Napollo_menu_zolte.png" class="img-fluid")
+                else
+                    img(src="/img/uni_logo_Napollo.png" class="img-fluid")
+        .links.flex.flex-d-row(class="link-on-color-"+pageColor.alias)

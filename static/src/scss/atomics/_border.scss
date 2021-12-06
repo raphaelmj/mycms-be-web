@@ -1,0 +1,28 @@
+@for $i from 0 through 6 {
+  .b-#{$i} {
+    border-width: #{inRem($i)};
+    border-style: solid;
+  }
+
+  .bb-#{$i} {
+    border-bottom-width: #{inRem($i)};
+    border-bottom-style: solid;
+  }
+
+  .bt-#{$i} {
+    border-top-width: #{inRem($i)};
+    border-top-style: solid;
+  }
+}
+
+.border-white {
+  border-color: $white;
+}
+
+.border-b-white {
+  border-bottom-color: $white;
+}
+
+.border-t-white {
+  border-top-color: $white;
+}

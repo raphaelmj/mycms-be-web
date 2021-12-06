@@ -1,0 +1,22 @@
+extends ../../layouts/page
+include ../../partials/contact/contact-groups-mixin
+block page-content
+    .content.pt-6.pb-6(class=((containerType === 'with-left') ? 'container-small default-align' : ''))
+        include ../../partials/breadcrumbs
+        - const department = data.dynamicData.departmentData.data.department
+        - const contactGroups = data.dynamicData.departmentData.data.contactGroups
+        - const departmentOffices = data.dynamicData.departmentData.data.departmentOffices;
+        //h2.page-title.on-white(class="font-on-color-"+pageColor.alias) #{department.name}
+        case department.viewType
+            when 'investManagment'
+                +contactGroups(contactGroups)
+            when 'buyArea'
+                +contactGroups(contactGroups)
+            when 'commercial'
+                +contactGroups(contactGroups)
+            when 'sellOfficeList'
+                h2.page-title.on-white(class="font-on-color-"+pageColor.alias) #{department.name}
+                include ../../partials/contact/offices
+            when 'pressOffice'
+                h2.page-title.on-white(class="font-on-color-"+pageColor.alias) #{department.name}
+                include ../../partials/contact/press-office

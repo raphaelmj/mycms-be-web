@@ -1,0 +1,25 @@
+db:
+  type: 'mysql'
+  host: 'example.db.host'
+  port: 3306
+  username: 'exampleUser'
+  password: 'examplePassword'
+  database: 'exampleBase'
+  synchronize: false
+paths:
+  uploadsFolder: 'images/uploads'
+pagination:
+  limit: 20
+mail:
+  host: 'example.mail.host'
+  port: 587
+  ignoreTLS: false
+  secure: false
+  auth:
+    user: 'exampleEmail'
+    pass: 'exampleEmailPassword'
+  defaults:
+    from: '"No Reply" <example@example.com>'
+  to: exampleEmailTo
+jwt:
+  secret: 'randomString'

@@ -1,0 +1,62 @@
+#contactForm.contact-form(class="contact-form-"+pageColor.alias ng-controller="ContactFormController as fcrtl" ng-init="fcrtl.initData()")
+    .close-btn
+        img(src="/images/min-close-"+pageColor.alias+".svg" class="img-fluid" ng-click="$parent.bc.closeContactForm()")
+    form(ng-submit="fcrtl.submitForm()")
+        .raport(ng-class="sendingRaport")
+            img(src="/images/loading.gif" alt="")
+        .raport(ng-class="sentRaport" ng-click="sentRaport=''")
+            h4(ng-click="sentRaport=''") Wiadomość została wysłana
+        .raport(ng-class="errorRaport" ng-click="errorRaport=''")
+            h4(ng-click="errorRaport=''") Serwis chwilowo niedostępny spróbuj za chwilę
+        .row.form-title
+            .col
+                h3.mb-3#formTitle
+        .row-form-control.one
+            input(type="text" name="name" ng-model="data.name" placeholder="imię i nazwisko*" class="w-100" ng-class="valid.name.className")
+        .row-form-control.double
+            input(type="text" name="email" ng-model="data.email" placeholder="adres mail*" ng-class="valid.email.className")
+            input(type="text" name="phone" ng-model="data.phone" placeholder="telefon*" ng-class="valid.phone.className")
+        .row-form-control.one.last.mb-5
+            textarea(name="description" ng-model="data.description" placeholder="tresc wiadomości*" class="w-100" ng-class="valid.description.className")
+        .row-check-box(ng-class="req1Class")
+            label
+                span.checkbox-squre
+                    span.select-in(ng-if="data.reg1")
+                    span.over(ng-click="data.reg1=!data.reg1")
+                span.info(ng-click="data.reg1=!data.reg1")
+                    | Wyrażam zgodę na przetwarzanie przez Napollo Residential Sp. z o.o., podanych przeze mnie w formularzu danych w celu opracowania i udzielenia odpowiedzi na moje pytanie
+                    a(href="http://rodo.napollo.pl/" target="_blank") (więcej)
+                    //span(ng-if="!regsContent.reg1") ...
+                    //span.more(ng-if="!regsContent.reg1" ng-click="regsContent.reg1=true") ROZWIŃ
+                    //span.more-content(ng-if="regsContent.reg1") przeze mnie w formularzu danych w celu opracowania i udzielenia odpowiedzi na moje pytanie
+                    //span.less(ng-if="regsContent.reg1" ng-click="regsContent.reg1=false") ZWIŃ
+        .row-check-box
+            label
+                span.checkbox-squre
+                    span.select-in(ng-if="data.reg2")
+                    span.over(ng-click="data.reg2=!data.reg2")
+                span.info(ng-click="data.reg2=!data.reg2")
+                    | Wyrażam zgodę na przetwarzanie przez Napollo Residential Sp. z o.o. podanych przeze mnie w formularzu danych, dla celów działań promocyjnych i marketingowych dotyczących inwestycji mieszkaniowych
+                    a(href="http://rodo.napollo.pl/" target="_blank") (więcej)
+                    //span(ng-if="!regsContent.reg2") ...
+                    //span.more(ng-if="!regsContent.reg2" ng-click="regsContent.reg2=true") ROZWIŃ
+                    //span.more-content(ng-if="regsContent.reg2") mnie w formularzu danych, dla celów działań promocyjnych i marketingowych dotyczących inwestycji mieszkaniowych
+                    //span.less(ng-if="regsContent.reg2" ng-click="regsContent.reg2=false") ZWIŃ
+        .row-check-box
+            label
+                span.checkbox-squre
+                    span.select-in(ng-if="data.reg3")
+                    span.over(ng-click="data.reg3=!data.reg3")
+                span.info(ng-click="data.reg3=!data.reg3")
+                    | Wyrażam zgodę na otrzymywanie informacji handlowych drogą elektroniczną od Napollo Residential Sp. z o.o. zgodnie z postanowieniami art. 10 ustawy z dnia 18 lipca 2012 r. o świadczeniu usług drogą elektroniczną (t.j. Dz.U. z 2017 r. poz. 1219) oraz na marketing bezpośredni Napollo Residential Sp. z o.o. przy użyciu telekomunikacyjnych urządzeń końcowych (np. telefon, adres poczty elektronicznej) i automatycznych systemów wywołujących polegający na otrzymywaniu informacji handlowych o inwestycjach mieszkaniowych
+                    a(href="http://rodo.napollo.pl/" target="_blank") (więcej)
+                    //span(ng-if="!regsContent.reg3") ...
+                    //span.more(ng-if="!regsContent.reg3" ng-click="regsContent.reg3=true") ROZWIŃ
+                    //span.more-content(ng-if="regsContent.reg3") Residential Sp. z o.o. zgodnie z postanowieniami art. 10 ustawy z dnia 18 lipca 2012 r. o świadczeniu usług drogą elektroniczną (t.j. Dz.U. z 2017 r. poz. 1219 ) oraz na marketing bezpośredni Napollo Residential Sp. z o.o. przy użyciu telekomunikacyjnych urządzeń końcowych (np. telefon, adres poczty elektronicznej) i automatycznych systemów wywołujących polegający na otrzymywaniu Informacji handlowych o inwestycjach mieszkaniowych
+                    //span.less(ng-if="regsContent.reg3" ng-click="regsContent.reg3=false") ZWIŃ
+        .row-desc
+            .col **Wyrażenie zgody jest dobrowolne, ale konieczne, do udzielenia odpowiedzi na Państwa zapytanie lub przedstawienie oferty.
+        .row-btn
+            .col
+                button(type="submit") WYŚLIJ
+

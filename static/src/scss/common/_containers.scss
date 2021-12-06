@@ -1,0 +1,152 @@
+.container-left-space{
+  margin-left: $default_container_margin;
+
+  @include small {
+    margin-left: auto;
+    margin-right: auto;
+    width: calc((#{$default_container}) - (#{inRem($wrap_context_beam_width)}));
+  }
+
+  @include large{
+    margin-left: $large_container_margin;
+  }
+
+  @include problemQuery(noneHeight) {
+    margin-left: $problem_container_margin;
+  }
+
+  @include xlarge{
+    margin-left: $xlarge_container_margin;
+  }
+
+  @include xxlarge{
+    margin-left: $xxlarge_container_margin;
+  }
+}
+
+.container-small{
+  &:not(.default-align) {
+    margin: auto;
+  }
+
+  width: calc((#{$default_container}) - (#{inRem($wrap_context_beam_width)}));
+
+  @include large{
+    width: $large_container;
+  }
+
+  @include problemQuery(noneHeight) {
+    width: $problem_container;
+  }
+
+  @include xlarge{
+    width: $xlarge_container;
+  }
+
+  @include xxlarge{
+    width: $xxlarge_container;
+  }
+}
+
+.container-small-plus {
+  margin: auto;
+  width: calc((#{$default_container}) + (#{inRem($wrap_context_beam_width)}));
+
+  @include large{
+    width: calc((#{$large_container}) + (#{inRem($wrap_context_beam_width / 2)}));
+  }
+
+  @include problemQuery(noneHeight) {
+    width: calc((#{$problem_container}) + (#{inRem($wrap_context_beam_width / 2)}));
+  }
+
+  @include xlarge{
+    width: calc((#{$xlarge_container}) + (#{inRem($wrap_context_beam_width / 2)}));
+  }
+
+  @include xxlarge{
+    width: calc((#{$xxlarge_container}) + (#{inRem($wrap_context_beam_width / 2)}));
+  }
+}
+
+.container-full{
+  margin: auto;
+  width: 100%;
+  &.with-left-column{
+    display: flex;
+
+    @include medium(down) {
+      justify-content: center;
+    }
+
+    .left-column {
+      width: calc((100% - #{$default_container}) / 2);
+
+      @include medium(down) {
+        display: none;
+      }
+
+      @include large {
+        width: calc((100% - #{$large_container}) / 2);
+      }
+
+      @include problemQuery(noneHeight) {
+        width: calc((100% - #{$problem_container}) / 2);
+      }
+
+      @include xlarge {
+        width: calc((100% - #{$xlarge_container}) / 2);
+      }
+
+      @include xxlarge {
+        width: calc((100% - #{$xxlarge_container}) / 2);
+      }
+    }
+  }
+}
+
+.view-container {
+  &:not(.no-min-height) {
+    min-height: 100vh;
+
+    @include medium(down) {
+      min-height: calc(100vh - #{inRem($beam_menu_height)});
+    }
+
+    @include xsmall(down) {
+      min-height: 100vh;
+    }
+
+  }
+
+  &.full-crop{
+    padding-top: inRem($beam_menu_height + $context_menu_height);
+    &:not(.fit-to-height) {
+      padding-bottom: inRem($beam_menu_height + $context_menu_height);
+    }
+  }
+
+  &.top-crop {
+    padding-top: inRem($beam_menu_height + $context_menu_height);
+    padding-bottom: inRem($beam_menu_height);
+  }
+
+  &.bottom-crop {
+    padding-top: inRem($beam_menu_height);
+    &:not(.fit-to-height) {
+      padding-bottom: inRem($beam_menu_height + $context_menu_height);
+    }
+  }
+
+  @include medium(down) {
+    padding-top: inRem($mobile_menu_height) !important;
+    padding-bottom: 0 !important;
+  }
+
+  &.notice-bg {
+    background: url("../../img/Grafika_tlo_o_nas.png") center bottom no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+}

@@ -1,0 +1,18 @@
+.invest-offices.mt-8
+    h3.office-title.on-white.mb-8(class="font-on-color-"+pageColor.alias) #{((invest.offices.length > 1) ? 'BIURA SPRZEDAŻY' : 'BIURO SPRZEDAŻY')}
+    each office, i in invest.offices
+        .invest-office.mb-5(class=((invest.offices.length > 1 && i!==(invest.offices.length-1))?'border-bottom-gray-slim pb-8':''))
+            .address.mb-4
+                h4.address-title.office-invest-subt Adres
+                .address-data !{office.address}
+            if (office.hours.length > 0)
+                .open-hours.mb-4
+                    +openHours(office.hours, pageColor)
+            +emailsAndPhonesBigger(office.emails, office.phones, pageColor)
+            if (contactOfficesPage)
+                - let departmentAlias = ''
+                - if (departmentWithOffices)
+                    - departmentAlias = departmentWithOffices.alias
+                if (officesInContactIds.includes(office.id))
+                    .office-link
+                        a(href=contactOfficesPage.path+'/'+departmentAlias+'#'+office.alias) więcej informacji o biurze

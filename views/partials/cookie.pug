@@ -1,0 +1,12 @@
+if (!isCookie)
+    .cookie-cloud(ng-controller="CookieController")
+        h4.mb-3.mt-3 Używamy plików cookie
+        .cookie-content
+            | Ta strona wykorzystuje pliki cookies. Używamy informacji zapisanych za pomocą plików cookies m.in. w celach reklamowych,
+            | statystycznych i w celu dostosowania naszej strony do indywidualnych potrzeb użytkowników. Korzystanie z naszej strony
+            | bez zmiany ustawień dotyczących cookies oznacza, że będą one zapisane w pamięci urządzenia.
+            | Korzystając ze strony wyrażasz zgodę na używanie plików cookies, zgodnie z aktualnymi ustawieniami przeglądarki.
+            = " "
+            a(href="/polityka-prywatnosci") POLITYKA PRYWATNOŚCI
+        .cookie-btn-beam.flex.flex-justify-content-end.flex-align-center
+            button(type="button" ng-click="hideCookieCloud()") Zgadzam się

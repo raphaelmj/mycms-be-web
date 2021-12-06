@@ -1,0 +1,187 @@
+$columns: 4;
+$default-space: 1;
+
+@mixin width-from-columns($i, $atomic-size) {
+  @if ($atomic-size != $i) {
+    width: calc((100% / #{$atomic-size}) * #{$i});
+  } @else {
+    width: 100%;
+  }
+}
+
+@mixin columns-for-breakpoint($atomic-size, $alias) {
+  @for $i from 1 through $columns {
+    >.column-#{$alias}-#{$i} {
+      @include width-from-columns($i, $atomic-size);
+    }
+  }
+}
+
+@mixin columns-breakpoints-grids($i, $alias) {
+  .columns-#{$alias}-#{$i} {
+    $value: (($i * $default-space) - 1) + rem;
+    $margin-left: $default-space + rem;
+
+    >* {
+      margin-left: $margin-left;
+      margin-bottom: $margin-left;
+      width: calc((100% - #{$value})  / #{$i});
+
+      &:nth-child(n) {
+        margin-left: $margin-left;
+      }
+
+      &:nth-child(#{$i}n + 1) {
+        margin-left: 0;
+      }
+    }
+
+    &.spaces-0 {
+      >* {
+        margin-left: 0;
+        margin-bottom: 0;
+        width: calc(100%  / #{$i});
+
+        &:nth-child(n) {
+          margin-left: 0;
+        }
+      }
+    }
+
+    @for $space from 2 through 6 {
+      &.spaces-#{$space} {
+        $value: (($i * $space) - $space) + rem;
+        $margin-left: $space + rem;
+
+        >* {
+          margin-left: $margin-left;
+          margin-bottom: $margin-left;
+          width: calc((100% - #{$value})  / #{$i});
+
+          &:nth-child(n) {
+            margin-left: $margin-left;
+          }
+
+          &:nth-child(#{$i}n + 1) {
+            margin-left: 0;
+          }
+
+          @media (max-width: 1400px) {
+            $value: (($i * ($space / 2)) - ($space / 2)) + rem;
+            $margin-left: ($space/2) + rem;
+            margin-left: $margin-left;
+            margin-bottom: $margin-left;
+            width: calc((100% - #{$value})  / #{$i});
+
+            &:nth-child(n) {
+              margin-left: $margin-left;
+            }
+
+            &:nth-child(#{$i}n + 1) {
+              margin-left: 0;
+            }
+          }
+
+        }
+      }
+    }
+
+  }
+}
+
+@mixin grid-atomics($atomic-size) {
+  @for $i from 1 through $columns {
+    >*.column-#{$i} {
+      @include width-from-columns($i, $atomic-size);
+    }
+  }
+  @include small {
+    @include columns-for-breakpoint($atomic-size, 'small');
+  }
+  @include medium {
+    @include columns-for-breakpoint($atomic-size, 'medium');
+  }
+  @include large(open) {
+    @include columns-for-breakpoint($atomic-size, 'large');
+  }
+  @include xlarge(open) {
+    @include columns-for-breakpoint($atomic-size, 'xlarge');
+  }
+  @include xxlarge {
+    @include columns-for-breakpoint($atomic-size, 'xxlarge');
+  }
+}
+
+.equal-grid {
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: 100%;
+
+  @for $i from 1 through $columns {
+    &-#{$i} {
+      display: inline-flex;
+      flex-wrap: wrap;
+      width: 100%;
+      @include grid-atomics($i);
+    }
+  }
+}
+
+@for $i from 1 through $columns {
+  .columns-#{$i} {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    $value: ($i - 1) + rem;
+
+    >* {
+      width: calc((100% - #{$value})  / #{$i});
+
+      &:nth-child(n) {
+        margin-left: 1rem;
+      }
+
+      &:nth-child(#{$i}n + 1) {
+        margin-left: 0;
+      }
+    }
+  }
+  @include xsmall {
+    @include columns-breakpoints-grids($i, 'x-small');
+  }
+  @include small {
+    @include columns-breakpoints-grids($i, 'small');
+  }
+  @include medium {
+    @include columns-breakpoints-grids($i, 'medium');
+  }
+  @include large(up) {
+    @include columns-breakpoints-grids($i, 'large');
+  }
+  @include xlarge(up) {
+    @include columns-breakpoints-grids($i, 'xlarge');
+  }
+  @include xxlarge {
+    @include columns-breakpoints-grids($i, 'xxlarge');
+  }
+}
+@for $i from 1 through $columns {
+  @for $space from 2 through 6 {
+    .spaces-#{$space} {
+      $value: (($i * $space) - $space) + rem;
+      $margin-left: $space + rem;
+
+
+      @for $i from 1 through $columns {
+        &.columns-#{$i} {
+          >* {
+            @media (min-width: 1200px) and (max-width: 1400px) {
+              $margin-left: ($space/2) + rem;
+            }
+            margin-bottom: $margin-left;
+          }
+        }
+      }
+    }
+  }
+}

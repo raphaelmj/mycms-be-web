@@ -1,0 +1,132 @@
+.row-map.row-poland(ng-controller='AboutPolandMapsController' ng-model='data' ng-init="data='';initData()")
+    .col-map(ng-model="classes")
+        each city in cities
+            h3.city(style='left: '+city.left+';top:'+city.top+';') !{city.name}
+        .legend-cont
+            .legend-row
+                .legend-el
+                    .point-legend.open-l
+                    .desc-legend
+                        | obiekty otwarte
+                .legend-el
+                    .point-legend.plan-l
+                    .desc-legend
+                        | inwestycje planowane
+        img.img.fluid(src='/images/poland_map.svg' ng-click='hideAll()')
+        each el,image in polandMap
+            if (el.type === 'single')
+                .point-invest(
+                    class=el.status+' '+el.size
+                    style='left: '+el.left+';top: '+el.top
+                    ng-model='classes['+el.key+']'
+                    ng-click='showCloud('+el.key+')'
+                    )
+                if (el.openTo === 'top')
+                    .cloud.hidden-cloud(
+                        class="c-"+el.status+' open-to-'+el.openTo+' [[classes['+el.key+'].zIndexMore]]'
+                        style="left: "+el.cloudLeft+";top:"+el.cloudTopBottom+';'
+                        ng-class="classes["+el.key+"].visibleCloud"
+                    )
+                        h5 !{el.name}
+                        .address-cloud.small-cloud(ng-class="classes["+el.key+"].sizeCloud") !{el.address}
+                        a(
+                            href=el.url
+                            target="_blank"
+                            ng-mouseover="showFullCloud("+el.key+")"
+                            ng-mouseleave="hideFullCloud("+el.key+")"
+                            )
+                else
+                    .cloud.hidden-cloud(
+                        class="c-" + el.status + ' open-to-' + el.openTo + ' [[classes[' + el.key + '].zIndexMore]]'
+                        style="left: " + el.cloudLeft + ";bottom:" + el.cloudTopBottom + ';'
+                        ng-class="classes[" + el.key + "].visibleCloud"
+                    )
+                        h5 !{el.name}
+                        .address-cloud.small-cloud(ng-class="classes[" + el.key + "].sizeCloud") !{el.address}
+                        a(
+                            href=el.url
+                            target="_blank"
+                            ng-mouseover="showFullCloud(" + el.key + ")"
+                            ng-mouseleave="hideFullCloud(" + el.key + ")"
+                        )
+            else
+                - let cloudsString = [];
+                - el.childs.forEach((value) => {
+                    - cloudsString.push(value)
+                - });
+                - cloudsString.join(',');
+                .point-invest(
+                    class=el.status + ' ' + el.size
+                    style='left: ' + el.left + ';top: ' + el.top
+                    ng-model='classes[' + el.key + ']'
+                    ng-click='showCloud('+cloudString+','+ el.key + ')'
+                )
+                each child,j in el.childs
+                    if (child.openTo === 'top')
+                        .cloud.hidden-cloud(
+                            class="c-" + child.status + ' open-to-' + child.openTo + ' [[classes["' + el.key + '"].clouds['+child.key+'].zIndexMore]]'
+                            style="left: " + child.cloudLeft + ";top:" + child.cloudTopBottom + ';'
+                            ng-class="classes['" + el.key + "'].clouds["+child.key+"].visibleCloud"
+                        )
+                            h5 !{child.name}
+                            .address-cloud.small-cloud(ng-class="classes['" + el.key + "'].clouds["+ child.key +"].sizeCloud") !{child.address}
+                            a(
+                                href=child.url
+                                target="_blank"
+                                ng-mouseover="showFullClouds(" + child.key + ",'"+ el.key +"')"
+                                ng-mouseleave="hideFullClouds(" + child.key + ",'"+ el.key +"')"
+                            )
+                    else
+                        .cloud.hidden-cloud(
+                            class="c-" + child.status + ' open-to-' + child.openTo + ' [[classes["' + el.key + '"].clouds['+child.key+'].zIndexMore]]'
+                            style="left: " + child.cloudLeft + ";bottom:" + child.cloudTopBottom + ';'
+                            ng-class="classes['" + el.key + "'].clouds["+child.key+"].visibleCloud"
+                        )
+                            h5 !{child.name}
+                            .address-cloud.small-cloud(ng-class="classes['" + el.key + "'].clouds["+ child.key +"].sizeCloud") !{child.address}
+                            a(
+                                href=child.url
+                                target="_blank"
+                                ng-mouseover="showFullClouds(" + child.key + ",'"+ el.key +"')"
+                                ng-mouseleave="hideFullClouds(" + child.key + ",'"+ el.key +"')"
+                            )
+    .col-info
+        .row-info
+            .col-icon
+                img.img.fluid(src='/images/icons/poland/map_icon_bag.svg' alt='')
+            .col-desc
+                h3.nr 13
+                .nr-desc park&oacute;w handlowych
+        .row-info
+            .col-icon
+                img.img.fluid(src='/images/icons/poland/map_icon_cart.svg' alt='')
+            .col-desc
+                h3.nr 3
+                .nr-desc galerie handlowe
+        .row-info
+            .col-icon
+                img.img.fluid(src='/images/icons/poland/map_icon_passage.svg' alt='')
+            .col-desc
+                h3.nr 3
+                .nr-desc pasa&zdot;e handlowe
+        .row-info
+            .col-icon
+                img.img.fluid(src='/images/icons/poland/map_icon_building.svg' alt='')
+            .col-desc
+                h3.nr
+                    | 100
+                    span.sufix tys.
+                .nr-desc mkw. GLA do 2020 r.
+        .row-info
+            .col-icon
+                img.img.fluid(src='/images/icons/poland/map_icon_wear.svg' alt='')
+            .col-desc
+                h3.nr 100
+                .nr-desc sta&lstrok;ych najemc&oacute;w
+        .row-info
+            .col-icon
+                img.img.fluid(src='/images/icons/poland/map_icon_people.svg' alt='')
+            .col-desc
+                h3.nr 1,6mln
+                .nr-desc wizyt miesi&eogon;cznie
+

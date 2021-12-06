@@ -1,0 +1,22 @@
+.format-html{
+
+  line-height: inRem(24);
+
+  h3 {
+    @include fontBold(inRem(20));
+    line-height: inRem(24);
+  }
+
+  &.blue-font {
+    color: $blue;
+  }
+
+  p {
+   margin-bottom: inRem(20);
+  }
+
+  ul, ol {
+    padding-left: inRem(35);
+  }
+
+}

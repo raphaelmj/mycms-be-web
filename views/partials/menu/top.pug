@@ -1,0 +1,20 @@
+nav.beam-menu.top-menu
+    .container-small.flex.flex-align-center.flex-justify-content-between
+        .left-top-nav
+            ul
+                each p in staticMenus.top
+                    - let title = (p.linkTitle?.length) ? p.linkTitle : p.title;
+                    - title = title.replace(/(<([^>]+)>)/gi, " ");
+                    li(class=((p.id === activePageId) ? 'active' : ''))
+                        +customPageFilterLink(p.id, p.path, title, nparkSpecial)
+        .right-top-nav.flex.flex-align-center
+            if (mainOffice)
+                if (mainOffice.phones.length > 0)
+                    img(src="/img/ikonka_przy_telefonie.png")
+            if (mainOffice)
+                if (mainOffice.phones.length > 0)
+                    a(href="tel:+"+mainOffice.phones[0] class="fw-bold ml-1 fs-20 text-decoration-none") #{mainOffice.phones[0]}
+if (contextMenuTop.length>0 || data.view === 'dynamic/variant/invest')
+    include top-context
+if (data.view === 'error404')
+    include top-context-error

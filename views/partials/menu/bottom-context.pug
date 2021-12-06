@@ -1,0 +1,30 @@
+.context-menu-beam.context-menu-beam__bottom.flex.flex-d-row.flex-align-center(class="bg-"+pageColor.alias)
+    .menu-content.flex.flex-d-row.flex-align-center.container-small-plus
+        if (contextMenuTop.length === 0)
+            .logo-left
+                a(href="/")
+                    if (pageColor.alias === 'yellow')
+                        img(src="/img/logo_Napollo_menu_zolte.png" class="img-fluid")
+                    else
+                        img(src="/img/uni_logo_Napollo.png" class="img-fluid")
+        .links.flex.flex-d-row(class="link-on-color-"+pageColor.alias)
+            ul.flex.flex-d-row.flex-align-center(
+                class=
+                    ((contextMenuBottom.length > 3) ? 'more-then-3 ' : '') +
+                    ((contextMenuTop.length > 0) ? 'no-logo' : 'no-logo')
+                )
+              each link in contextMenuBottom
+                  if (data.isPage)
+                      li(class=((activePageId === link.id && link.type === 'page') ? 'active' : ''))
+                          +customPageFilterLink(link.id, link.path, link.name, nparkSpecial && link.type === 'page')
+                  else if (data.view === 'dynamic/variant')
+                      li(class=((activeVariantId === link.id && link.type === 'variant') ? 'active' : ''))
+                          +customPageFilterLink(link.id, link.path, link.linkName, nparkSpecial && link.type === 'page')
+                  else if (data.view === 'dynamic/department')
+                      li(class=((activeDepartmentId === link.id && link.type === 'department') ? 'active' : ''))
+                          +customPageFilterLink(link.id, link.path, link.name, nparkSpecial && link.type === 'page')
+                  else
+                      li
+                          +customPageFilterLink(link.id, link.path, link.name, nparkSpecial && link.type === 'page')
+
+    .wrap-abs(class="wrap-"+pageColor.alias)

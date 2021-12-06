@@ -1,0 +1,99 @@
+- let linksM = [];
+- if (page) {
+- linksM = page.rightLinks;
+- }
+- if (parentPage) {
+- linksM = parentPage.rightLinks;
+- }
+- const iconSuffixM = (pageColor.alias === 'yellow') ? '-dark.png' : '-white.png';
+.mobile-menu(class="bg-"+pageColor.alias)
+    .menu-m-top.flex.flex-align-center
+        .image-logo.flex.flex-align-center.flex-justify-content-center
+            a(href="/")
+                if (pageColor.alias === 'yellow')
+                    img(src="/img/logo_Napollo_menu_zolte.png" class="img-fluid")
+                else
+                    img(src="/img/uni_logo_Napollo.png" class="img-fluid")
+        .info-right.flex.flex-justify-content-end.flex-align-center
+            .icons-links.flex.flex-align-center
+                each link in linksM
+                    a.block(href=link.link target=link.target)
+                        img(src=link.icon+iconSuffixM)
+            .burger
+                .line
+                .line
+                .line
+                a(href="#" ng-click="$event.preventDefault();bc.mobileMenuToogle()")
+    .menu-m-content.flex.flex-d-column(id="mobileMenuContent" style="display: none")
+        .menu-content.pb-8
+            ul.mt-4(class="link-on-color-"+pageColor.alias)
+              - const topStaticExistsPages = [];
+              each p in staticMenus.top
+                - let title = p.title;
+                - topStaticExistsPages.push(p.id);
+                li(class=((p.id === activePageId) ? 'active' : ''))
+                    +customPageFilterLink(p.id, p.path, title, nparkSpecial)
+            ul.mt-4.bt-1.border-white.pt-4(class="link-on-color-"+pageColor.alias)
+              - let countTopCtx = 0;
+              each link in contextMenuTop
+                  - let isOnTopStatic = !(link.type === 'page' && topStaticExistsPages.includes(link.id))
+                  if (isOnTopStatic)
+                      - countTopCtx++;
+                      if (data.isPage)
+                          li(class=((activePageId === link.id && link.type === 'page') ? 'active' : ''))
+                              +customPageFilterLink(link.id, link.path, link.defaultName, nparkSpecial && link.type === 'page')
+                      else if (data.view === 'dynamic/variant')
+                          li(class=((activeVariantId === link.id && link.type === 'variant') ? 'active' : ''))
+                              +customPageFilterLink(link.id, link.path, link.defaultName, nparkSpecial && link.type === 'page')
+                      else if (data.view === 'dynamic/department')
+                          li(class=((activeDepartmentId === link.id && link.type === 'department') ? 'active' : ''))
+                              +customPageFilterLink(link.id, link.path, link.defaultName, nparkSpecial && link.type === 'page')
+                      else if (data.view === 'dynamic/article')
+                          li(class=((activePageId === link.id) ? 'active' : ''))
+                              +customPageFilterLink(link.id, link.path, link.defaultName,nparkSpecial && link.type === 'page')
+                      else if (data.view === 'dynamic/variant/invest')
+                          li(class=((activeVariantId === link.id && link.type === 'variant') ? 'active' : ''))
+                              +customPageFilterLink(link.id, link.path, link.defaultName, nparkSpecial && link.type === 'page')
+                      else
+                          li
+                              +customPageFilterLink(link.id, link.path, link.name, nparkSpecial && link.type === 'page')
+              each link in contextMenuBottom
+                - let isOnTopStatic = !(link.type === 'page' && topStaticExistsPages.includes(link.id))
+                if (isOnTopStatic)
+                    if (data.isPage)
+                      li(class=((activePageId === link.id && link.type === 'page') ? 'active' : ''))
+                          +customPageFilterLink(link.id, link.path, link.defaultName, nparkSpecial && link.type === 'page')
+                    else if (data.view === 'dynamic/variant')
+                      li(class=((activeVariantId === link.id && link.type === 'variant') ? 'active' : ''))
+                          +customPageFilterLink(link.id, link.path, link.defaultName, nparkSpecial && link.type === 'page')
+                    else if (data.view === 'dynamic/department')
+                      li(class=((activeDepartmentId === link.id && link.type === 'department') ? 'active' : ''))
+                          +customPageFilterLink(link.id, link.path, link.defaultName, nparkSpecial && link.type === 'page')
+                    else
+                        +customPageFilterLink(link.id, link.path, link.name, nparkSpecial && link.type === 'page')
+            if (containerType === 'with-left')
+                ul.mt-1.pt-1(class="link-on-color-"+pageColor.alias)
+                    each p in leftPages
+                        - let titleM = (p.linkTitle?.length) ? p.linkTitle : p.title
+                        if (!topStaticExistsPages.includes(p.id))
+                            li(class=((p.id === activePageId) ? 'active' : ''))
+                                a(href=p.path) #{titleM}
+                    if (data.view === 'contact')
+                        if (data.pageTypeData.pageContact.mainDepartmentData)
+                            li(class="active")
+                                a(href=page.path) #{data.pageTypeData.pageContact.mainDepartmentData.department.name}
+                        each d in data.pageTypeData.pageContact.otherDepartments
+                            li
+                                a(href=page.path + '/' + d.alias) #{d.name}
+                    if (data.view === 'dynamic/department')
+                        if (data.dynamicData.departmentData.mainDepartment)
+                            li
+                                a(href=parentPage.path) #{data.dynamicData.departmentData.mainDepartment.name}
+                        each d in data.dynamicData.departmentData.otherDepartments
+                            li(class=((activeDepartmentId === d.id) ? "active" : ""))
+                                a(href=parentPage.path + '/' + d.alias) #{d.name}
+
+            .icons-links.flex-align-center.mt-4
+                each link in linksM
+                    a.block(href=link.link target=link.target)
+                        img(src=link.icon + iconSuffixM)

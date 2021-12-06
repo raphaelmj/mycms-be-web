@@ -1,0 +1,34 @@
+extends ../../layouts/page
+block page-content
+    include ../../partials/contact/contact-groups-mixin
+    .content.pt-6.pb-6(class=((containerType === 'with-left') ? 'container-small default-align' : ''))
+        include ../../partials/breadcrumbs
+        include ../../partials/variant/info
+        .investitions.equal-grid.columns-1.columns-medium-2.columns-large-2.spaces-5
+            each invest,i in data.dynamicData.invests.invests
+                .column
+                    .invest.w-100
+                        .image(style="--aspect-ratio: 1/1;")
+                            img(src="/img/blank.gif" data-src=invest.listImage data-srcset=invest.listImage class="lazy")
+                            if (invest.district && invest.district !== '' && invest.showDistrictLabel)
+                                .info-label.p-2(style="background-color: #"+invest.labelColor+";") #{invest.district}
+                        .data(style="--aspect-ratio: 1/1;")
+                            .content-in
+                                img(src="/img/blank.gif" data-src=invest.logo data-srcset=invest.logo class="lazy" class="img-fluid")
+                                .more-invest.flex.flex-justify-content-center
+                                    style.
+                                        a.more-bt.more-#{i}:hover {background-color: #{'#'+((invest.labelColor)?invest.labelColor:pageColor.rgb)} !important;border:2px solid #{'#'+((invest.labelColor)?invest.labelColor:pageColor.rgb)} !important; };
+                                    a.more-bt.block.p-4(class="more-"+i+((invest.labelColor)?' more-with-color': ' more-with-color') href=data.dynamicData.invests.currentVariant.path+ '/'+ invest.alias)
+                                        | SPRAWDŹ SZCZEGÓŁY
+                    .invest-under
+                        .left-col
+                            h3.invest-name.mb-2.mt-3 #{invest.name}
+                            .address #{invest.address}
+                        .right-col
+                            if (invest.workState && invest.workState.length > 0)
+                                span.work-state.block.mt-3.text-center #{invest.workState}
+        if (data.dynamicData.invests.contactsSections && data.dynamicData.invests.contactsSections.length > 0)
+            .separator.mt-12.mb-8(class="border-bottom-" + pageColor.alias)
+            +contactGroups(data.dynamicData.invests.contactsSections, 3, true)
+
+

@@ -1,0 +1,19 @@
+include ../mixins
+<!DOCTYPE html>
+html(lang="pl" ng-app="app")
+    head
+        meta(charset="UTF-8")
+        meta(name="robots" content="noindex")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Napollo.pl - 404
+        link(rel="icon" type="image/x-icon" href="/favicon.ico")
+        include ../core/preload
+        include ../core/styles
+    body(ng-controller="BodyController as bc")
+        //include ../core/calulate
+        include ../partials/menu/top
+        include ../partials/menu/mobile-menu
+        block content
+        include ../partials/menu/bottom
+        include ../partials/cookie
+        include ../core/scripts

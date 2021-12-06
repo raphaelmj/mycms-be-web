@@ -1,0 +1,161 @@
+@mixin problemQuery($range: noneHeight) {
+  @if ($range==inHeight) {
+    @media (max-height: 769.98px) and (orientation: landscape) and (min-width: 1200px) and (max-width: 1440px) {
+      @content;
+    }
+  } @else if($range==outHeight) {
+    @media (min-height: 770px) and (orientation: landscape) and (min-width: 1200px) and (max-width: 1440px) {
+      @content;
+    }
+  } @else if($range == noneHeight) {
+    @media (min-width: 1200px) and (max-width: 1440px) {
+      @content;
+    }
+  }
+}
+
+@mixin xxlarge {
+  @media (min-width: 1920px) {
+    @content;
+  }
+}
+
+@mixin xlarge($isOpen: close) {
+  @if ($isOpen == close) {
+    @media (max-width: 1919.98px) and (min-width: 1680px) {
+      @content;
+    }
+  } @else {
+    @media (min-width: 1680px) {
+      @content;
+    }
+  }
+}
+
+@mixin large($isOpen: close) {
+  @if ($isOpen == close) {
+    @media (max-width: 1679.98px) and (min-width: 1200px) {
+      @content;
+    }
+  } @else {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+}
+
+@mixin mediumLarge($openBreak: none) {
+  @if ($openBreak==up) {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  } @else if($openBreak==down) {
+    @media (max-width: 1399.98px) {
+      @content;
+    }
+  } @else if($openBreak==under) {
+    @media (min-width: 1400px) {
+      @content;
+    }
+  } @else {
+    @media (max-width: 1399.98px) and (min-width: 1200px) {
+      @content;
+    }
+  }
+}
+@mixin medium($openBreak: none) {
+  @if ($openBreak==up) {
+    @media (min-width: 992px) {
+      @content;
+    }
+  } @else if($openBreak==down) {
+    @media (max-width: 1199.98px) {
+      @content;
+    }
+  } @else if($openBreak==under) {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  } @else {
+    @media (max-width: 1199.98px) and (min-width: 992px) {
+      @content;
+    }
+  }
+}
+@mixin smallMedium($openBreak: none) {
+  @if ($openBreak==up) {
+    @media (min-width: 992px) {
+      @content;
+    }
+  } @else if($openBreak==down) {
+    @media (max-width: 1159.98px) {
+      @content;
+    }
+  } @else if($openBreak==under) {
+    @media (min-width: 1160px) {
+      @content;
+    }
+  } @else {
+    @media (max-width: 1159.98px) and (min-width: 992px) {
+      @content;
+    }
+  }
+}
+
+@mixin small($openBreak: none) {
+  @if ($openBreak==up) {
+    @media (min-width: 768px) {
+      @content;
+    }
+  } @else if($openBreak==down) {
+    @media (max-width: 991.98px) {
+      @content;
+    }
+  } @else if($openBreak==under) {
+    @media (min-width: 992px) {
+      @content;
+    }
+  } @else {
+    @media (max-width: 991.98px) and (min-width: 768px) {
+      @content;
+    }
+  }
+}
+
+@mixin xsmall($openBreak: none) {
+  @if ($openBreak==up) {
+    @media (min-width: 540px) {
+      @content;
+    }
+  } @else if($openBreak==down) {
+    @media (max-width: 767.98px) {
+      @content;
+    }
+  } @else if($openBreak==under) {
+    @media (min-width: 768px) {
+      @content;
+    }
+  } @else {
+    @media (max-width: 767.98px) and (min-width: 540px) {
+      @content;
+    }
+  }
+}
+
+@mixin xxsmall($orient: none) {
+  @if($orient==none) {
+    @media (max-width: 539.98px) {
+      @content;
+    }
+  }@else if($orient==landscape) {
+    @media (max-width: 539.98px) and (orientation: landscape) {
+      @content;
+    }
+  }
+}
+
+@mixin xxxsmall {
+  @media (max-width: 480px) {
+    @content;
+  }
+}

@@ -1,0 +1,47 @@
+- const invest = data.dynamicData.invest.investData;
+- const contacts = data.dynamicData.invest.contacts;
+- const contactOfficesPage = data.dynamicData.invest.contactOfficesPage;
+- const departmentWithOffices = data.dynamicData.invest.departmentWithOffices;
+- const officesInContactIds = data.dynamicData.invest.officesInContactIds;
+include ../contact/contact-groups-mixin
+.invest-content
+    h2.page-title.on-white.mt-8(class="font-on-color-"+pageColor.alias) #{invest.name}
+    .equal-grid.columns-1.columns-medium-2.columns-large-2.spaces-5
+        .column.mb-8.important
+            img(src="/img/blank.gif" data-src=invest.fullImage data-srcset=invest.fullImage class="img-fluid lazy")
+        .column.mb-8.important
+            include info-block
+        .column.left-text.format-html.mb-8.important
+            | !{invest.textLeft}
+        .column.right-text.format-html.mb-8.important
+            | !{invest.textRight}
+            if (invest.link && invest.link.link != '' && invest.showWebsite)
+                .over-link.mt-4
+                    b Zapraszamy na stronę www inwestycji
+                a.link-invest-site.flex.w-100.flex-align-center.flex-justify-content-between.mt-2(href=invest.link.link target="_blank" class="wrap-link-"+pageColor.alias)
+                    span.link-text.w-100.text-center #{((invest.link.name && invest.link.name != '')?invest.link.name:invest.link.link)}
+                    span.wrap-on
+    if (invest.galleryType === 'standard' && invest.gallery && invest.gallery.length > 0)
+        include gallery-standard
+    if (invest.galleryType === 'progress' && invest.progressGallery && invest.progressGallery.length > 0)
+        include gallery-progress
+    if (invest.mapFiles)
+        if (invest.mapFiles.moreFile && invest.mapFiles.lessFile)
+            .separator.mt-12.mb-8(class="border-bottom-"+pageColor.alias)
+            .localization-invest
+                h3.loc-title.on-white.mb-8(class="font-on-color-"+pageColor.alias) LOKALIZACJA
+                .loc-data
+                    img.click-open(
+                        src="/img/blank.gif"
+                        data-src=invest.mapFiles.lessFile
+                        data-srcset=invest.mapFiles.lessFile
+                        data-size=invest.mapFiles.moreFile.sizeString
+                        data-image-src=invest.mapFiles.moreFile.src
+                        class="img-fluid lazy"
+                    )
+    if (invest.offices && invest.offices.length > 0)
+        .separator.mt-12.mb-8(class="border-bottom-"+pageColor.alias)
+        include invest-offices
+    if (contacts && contacts.length > 0)
+        .separator.mt-12.mb-8(class="border-bottom-"+pageColor.alias)
+        +contactGroups(contacts, 3, false)

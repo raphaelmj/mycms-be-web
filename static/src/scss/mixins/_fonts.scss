@@ -1,0 +1,34 @@
+@mixin fontExtraLight($size: 1rem, $style: normal) {
+  font-family: 'Titillium Web', sans-serif;
+  font-size: $size;
+  font-style: $style;
+  font-weight: 200;
+}
+
+@mixin fontLight($size: 1rem, $style: normal) {
+  font-family: 'Titillium Web', sans-serif;
+  font-size: $size;
+  font-style: $style;
+  font-weight: 300;
+}
+
+@mixin fontRegular($size: 1rem, $style: normal) {
+  font-family: 'Titillium Web', sans-serif;
+  font-size: $size;
+  font-style: $style;
+  font-weight: 400;
+}
+
+@mixin fontSemiBold($size: 1rem, $style: normal) {
+  font-family: 'Titillium Web', sans-serif;
+  font-size: $size;
+  font-style: $style;
+  font-weight: 600;
+}
+
+@mixin fontBold($size: 1rem, $style: normal) {
+  font-family: 'Titillium Web', sans-serif;
+  font-size: $size;
+  font-style: $style;
+  font-weight: 700;
+}

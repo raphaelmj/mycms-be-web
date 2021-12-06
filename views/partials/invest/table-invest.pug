@@ -1,0 +1,69 @@
+- const invest = data.dynamicData.invest.investData;
+- const contacts = data.dynamicData.invest.contacts;
+include ../contact/contact-groups-mixin
+.invest-content
+    h2.page-title.on-white.mt-8(class="font-on-color-"+pageColor.alias) #{invest.name}
+    .address Adres: #{invest.address}
+    .separator.mt-12.mb-8(class="border-bottom-"+pageColor.alias)
+    if (contacts.length > 0)
+        +contactGroups(contacts, 3, true, true)
+        .separator.mt-12.mb-8(class="border-bottom-"+pageColor.alias)
+    if (invest.customTable && invest.customTable.length > 0 && invest.showCustomTable)
+        h2.page-title.on-white.mt-8(class="font-on-color-"+pageColor.alias) PLANY LOKALI
+        .custom-table
+            each element in invest.customTable
+                .tc.tc-1.flex-align-start
+                    if (element.building)
+                        .building-info.mb-2.text-uppercase
+                            | Budynek
+                            =" "
+                            span.build-nr.colorize.fw-bold(class="font-on-color-"+pageColor.alias) #{element.building}
+                    .local-name.info #{element.localName}
+                .tc.tc-2.flex-align-center
+                    if (element.state.stateName === 'rent')
+                        .state-name.mb-2 WYNAJĘTY
+                        if (element.state.firm && element.state.firm != '')
+                            .firm-name #{element.state.firm}
+                    if (element.state.stateName === 'free')
+                        .state-name WOLNY
+                .tc.tc-3.flex-align-center
+                    if (element.area && element.area != '')
+                        .area
+                            strong.fw-bold.fs-20 #{element.area} &nbsp;
+                            | m<sup>2</sup>
+                .tc.tc-4.flex-align-start
+                    if (element.infoAssets.situaPlan)
+                        a.link-asset.flex.flex-align-center.mb-3.click-open(
+                            class="hover-"+pageColor.alias
+                            href="#"
+                            data-size=element.infoAssets.situaPlan.sizeString
+                            data-image-src=element.infoAssets.situaPlan.src
+                            ng-click="$event.preventDefault()"
+                        )
+                            img(src="/img/blank32.gif" data-src="/img/lokalizacja_ico.png" data-srcset="/img/lokalizacja_ico.png" class="lazy icon mr-1")
+                            | PLAN SYTUACYJNY
+                    if (element.infoAssets.buildingLocation)
+                        a.link-asset.flex.flex-align-center.mb-3.click-open(
+                            class="hover-"+pageColor.alias
+                            href="#"
+                            data-size=element.infoAssets.buildingLocation.sizeString
+                            data-image-src=element.infoAssets.buildingLocation.src
+                            ng-click="$event.preventDefault()"
+                            )
+                            img(src="/img/blank32.gif" data-src="/img/ikonka_lokalizacja_w_budynku_inactive.png" data-srcset="/img/ikonka_lokalizacja_w_budynku_inactive.png" class="lazy icon mr-1")
+                            | LOKALIZACJA W BUDYNKU
+                    if (element.infoAssets.plan)
+                        a.link-asset.flex.flex-align-center.click-open(
+                            class="hover-"+pageColor.alias
+                            href="#"
+                            data-size=element.infoAssets.plan.sizeString
+                            data-image-src=element.infoAssets.plan.src
+                            ng-click="$event.preventDefault()"
+                            )
+                            img(src="/img/blank32.gif" data-src="/img/ikonka_lokalizacja_w_budynku_inactive.png" data-srcset="/img/ikonka_lokalizacja_w_budynku_inactive.png" class="lazy icon mr-1")
+                            | PLAN LOKALU
+    .separator.mt-12.mb-8
+    if (invest.galleryType === 'standard' && invest.gallery && invest.gallery.length > 0)
+        include gallery-standard
+    if (invest.galleryType === 'progress' && invest.progressGallery && invest.progressGallery.length > 0)
+        include gallery-progress

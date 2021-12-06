@@ -1,0 +1,14 @@
+extends ../layouts/page
+block page-content
+    .content.pt-6.pb-6(class=((containerType === 'with-left') ? 'container-small default-align' : '') id=alias)
+        include ../partials/breadcrumbs
+        h2.page-title.on-white.with-arrows.mb-1.important(class="font-on-color-"+pageColor.alias+" arrows-"+pageColor.alias) #{page.title}
+        .notice-list
+            each notice in data.pageTypeData.notices
+                .notice-row
+                    .title
+                        h2.notice-title.on-white.mt-4.mb-4(class="font-on-color-"+pageColor.alias) #{notice.name}
+                    .more-bt.flex.flex-align-center.flex-d-row
+                        .wrap-right(class="wrap-"+pageColor.alias)
+                        span.flex.flex-align-center.flex-justify-content-center(class="span-"+pageColor.alias) WIĘCEJ INFORMACJI
+                        a(href=page.path+'/'+notice.alias)

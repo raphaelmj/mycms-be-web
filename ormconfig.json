@@ -1,0 +1,10 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "dropSchema": true,
+  "port": 3306,
+  "username": "root",
+  "password": "",
+  "database": "napollo_site",
+  "entities": ["./src/entities/**.ts"]
+}

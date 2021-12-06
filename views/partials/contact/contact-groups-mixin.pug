@@ -1,0 +1,25 @@
+mixin contactGroups(contactGroups = [], largeSize = 3, withForm = false, groupsInColumns = false)
+    .contact-groups(class=((groupsInColumns)?'groups-in-columns equal-grid columns-1 spaces-2 columns-small-'+largeSize+" columns-medium-"+largeSize+" columns-large-"+largeSize:''))
+        each group in contactGroups
+            .contact-group(class="group-color-"+pageColor.alias+((groupsInColumns)?' group-column':''))
+                if (group.name && group.name != '')
+                    h3.group-title.on-white(class="font-on-color-"+pageColor.alias) #{group.name}
+                - if (groupsInColumns)
+                    - largeSize = 1;
+                .equal-grid.columns-1.spaces-2(class="columns-small-"+largeSize+" columns-medium-"+largeSize+" columns-large-"+largeSize)
+                    each person in group.persons
+                        if (person.data.status)
+                            .column.person-data.mb-10.important
+                                h4.person-name.on-white(class="font-on-color-"+pageColor.alias) #{person.data.name}
+                                if (person.customRole)
+                                    span.block.person-role #{person.customRole}
+                                if (!person.customRole && person.data.position)
+                                    span.block.person-role #{person.data.position}
+                                - const emails = [person.data.email].filter(p => (!!p && p != ''))
+                                +emailsAndPhones(emails, person.data.phones, pageColor)
+                                if (withForm || person.showForm || person.data.showForm)
+                                    button(
+                                        type="button"
+                                        ng-click="bc.openContactForm('"+person.data.name+"', '"+person.data.email+"')"
+                                        class="button-send-contact pt-1 pb-1 pl-2 pr-2 mt-1"
+                                        ) WYŚLIJ ZAPYTANIE

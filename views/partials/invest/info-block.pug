@@ -1,0 +1,93 @@
+.info-block.flex.flex-wrap
+    .column-l.label.pb-4.text-right
+        | Nazwa:
+    .column-r.content.pb-4
+        | !{invest.name}
+
+    .column-l.label.pb-4.text-right
+        | Lokalizacja:
+    .column-r.content.pb-4
+        | !{invest.location}
+
+    .column-l.label.pb-4.text-right
+        | Adres:
+    .column-r.content.pb-4
+        | !{invest.address}
+
+    if (invest.buildingsCount && invest.buildingsCount != '')
+        .column-l.label.pb-4.text-right
+            | Liczba budynków:
+        .column-r.content.pb-4
+            | !{invest.buildingsCount}
+
+    if (invest.floorCount && invest.floorCount != '')
+        .column-l.label.pb-4.text-right
+            | Liczba pięter:
+        .column-r.content.pb-4
+            | !{invest.floorCount}
+
+    if (invest.flatCount && invest.flatCount != '')
+        .column-l.label.pb-4.text-right
+            | Liczba mieszkań:
+        .column-r.content.pb-4
+            | !{invest.flatCount}
+
+    if (invest.flatsAreas && invest.flatsAreas != '')
+        .column-l.label.pb-4.text-right
+            | Powierzchnie mieszkań:
+        .column-r.content.pb-4
+            | !{invest.flatsAreas}
+
+    if (invest.rentAreaSpace && invest.rentAreSpace != '')
+        .column-l.label.pb-4.text-right
+            | Powierzchnia najmu:
+        .column-r.content.pb-4
+            | !{invest.rentAreaSpace}
+
+    if (invest.parking && invest.parking != '')
+        .column-l.label.pb-4.text-right
+            | Liczba miejsc parkingowych:
+        .column-r.content.pb-4
+            | !{invest.parking}
+
+    if (invest.garageCount && invest.garageCount != '')
+        .column-l.label.pb-4.text-right
+            | Liczba miejsc garażowych:
+        .column-r.content.pb-4
+            | !{invest.garageCount}
+
+    if (invest.serviceLocalsCount && invest.serviceLocalsCount != '')
+        .column-l.label.pb-4.text-right
+            | Lokale usługowe:
+        .column-r.content.pb-4
+            | !{invest.serviceLocalsCount}
+
+    if (invest.openDate && invest.openDate != '')
+        .column-l.label.pb-4.text-right
+            | Data otwarcia:
+        .column-r.content.pb-4
+            | !{invest.openDate}
+
+    if (invest.remodeling && invest.remodeling != '')
+        .column-l.label.pb-4.text-right
+            | Data renowacji:
+        .column-r.content.pb-4
+            | !{invest.remodeling}
+
+    if (invest.buyDate && invest.buyDate != '')
+        .column-l.label.pb-4.text-right
+            | Data zakupu:
+        .column-r.content.pb-4
+            | !{invest.buyDate}
+
+    if (invest.endDate && invest.endDate != '')
+        .column-l.label.pb-4.text-right
+            | Termin realizacji:
+        .column-r.content.pb-4
+            | !{invest.endDate}
+
+    if (invest.rentiers && invest.rentiers != '')
+        .column-l.label.pb-4.text-right
+            | Główni najemcy:
+        .column-r.content.pb-4
+            | !{invest.rentiers}

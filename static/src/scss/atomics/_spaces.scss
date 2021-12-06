@@ -1,0 +1,292 @@
+$colsAmount: 16;
+$step: 4;
+$startSpace: 6;
+
+@mixin atomicPaddingsAndMargins($i, $widthShortcut) {
+
+  @if($i == 0) {
+    .p-#{$widthShortcut}-#{$i} {
+      padding: 0;
+      &.important {
+        padding: 0 !important;
+      }
+    }
+
+    .pl-#{$widthShortcut}-#{$i} {
+      padding-left: 0;
+      &.important {
+        padding-left: 0 !important;
+      }
+    }
+
+    .pr-#{$widthShortcut}-#{$i} {
+      padding-right: 0;
+      &.important {
+        padding-right: 0 !important;
+      }
+    }
+
+    .pt-#{$widthShortcut}-#{$i} {
+      padding-top: 0;
+      &.important {
+        padding-top: 0 !important;
+      }
+    }
+
+    .pb-#{$widthShortcut}-#{$i} {
+      padding-bottom: 0;
+      &.important {
+        padding-bottom: 0 !important;
+      }
+    }
+
+    .m-#{$widthShortcut}-#{$i} {
+      margin: 0;
+      &.important {
+        margin: 0 !important;
+      }
+    }
+
+    .ml-#{$widthShortcut}-#{$i} {
+      margin-left: 0;
+      &.important {
+        margin-left: 0 !important;
+      }
+    }
+
+    .mr-#{$widthShortcut}-#{$i} {
+      margin-right: 0;
+      &.important {
+        margin-right: 0 !important;
+      }
+    }
+
+    .mt-#{$widthShortcut}-#{$i} {
+      margin-top: 0;
+      &.important {
+        margin-top: 0 !important;
+      }
+    }
+
+    .mb-#{$widthShortcut}-#{$i} {
+      margin-bottom: 0;
+      &.important {
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+
+  @if($i != 0) {
+    .p-#{$widthShortcut}-#{$i} {
+      padding: inRem((($i - 1) * $step) + $startSpace);
+      &.important {
+        padding: inRem((($i - 1) * $step) + $startSpace) !important;
+      }
+    }
+
+    .pl-#{$widthShortcut}-#{$i} {
+      padding-left: inRem((($i - 1) * $step) + $startSpace);
+    }
+
+    .pr-#{$widthShortcut}-#{$i} {
+      padding-right: inRem((($i - 1) * $step) + $startSpace);
+    }
+
+    .pt-#{$widthShortcut}-#{$i} {
+      padding-top: inRem((($i - 1) * $step) + $startSpace);
+    }
+
+    .pb-#{$widthShortcut}-#{$i} {
+      padding-bottom: inRem((($i - 1) * $step) + $startSpace);
+    }
+
+    .m-#{$widthShortcut}-#{$i} {
+      margin: inRem((($i - 1) * $step) + $startSpace);
+    }
+
+    .ml-#{$widthShortcut}-#{$i} {
+      margin-left: inRem((($i - 1) * $step) + $startSpace);
+    }
+
+    .mr-#{$widthShortcut}-#{$i} {
+      margin-right: inRem((($i - 1) * $step) + $startSpace);
+    }
+
+    .mt-#{$widthShortcut}-#{$i} {
+      margin-top: inRem((($i - 1) * $step) + $startSpace);
+    }
+
+    .mb-#{$widthShortcut}-#{$i} {
+      margin-bottom: inRem((($i - 1) * $step) + $startSpace);
+      &.important {
+        margin-bottom: inRem((($i - 1) * $step) + $startSpace) !important;
+      }
+    }
+  }
+
+
+}
+
+@for $i from 0 through $colsAmount {
+
+  @if($i == 0) {
+    .p-#{$i} {
+      padding: 0;
+      &.important {
+        padding: 0 !important;
+      }
+    }
+
+    .pl-#{$i} {
+      padding-left: 0;
+      &.important {
+        padding-left: 0 !important;
+      }
+    }
+
+    .pr-#{$i} {
+      padding-right: 0;
+      &.important {
+        padding-right: 0 !important;
+      }
+    }
+
+    .pt-#{$i} {
+      padding-top: 0;
+      &.important {
+        padding-top: 0 !important;
+      }
+    }
+
+    .pb-#{$i} {
+      padding-bottom: 0;
+      &.important {
+        padding-bottom: 0 !important;
+      }
+    }
+
+    .m-#{$i} {
+      margin: 0;
+      &.important {
+        margin: 0 !important;
+      }
+    }
+
+    .ml-#{$i} {
+      margin-left: 0;
+      &.important {
+        margin-left: 0 !important;
+      }
+    }
+
+    .mr-#{$i} {
+      margin-right: 0;
+      &.important {
+        margin-right: 0 !important;
+      }
+    }
+
+    .mt-#{$i} {
+      margin-top: 0;
+      &.important {
+        margin-top: 0 !important;
+      }
+    }
+
+    .mb-#{$i} {
+      margin-bottom: 0;
+      &.important {
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+
+  @if($i != 0) {
+    .p-#{$i} {
+      padding: inRem((($i - 1) * $step) + $startSpace);
+      &.important {
+        padding: inRem((($i - 1) * $step) + $startSpace) !important;
+      }
+    }
+
+    .pl-#{$i} {
+      padding-left: inRem((($i - 1) * $step) + $startSpace);
+      &.important {
+        padding-left: inRem((($i - 1) * $step) + $startSpace) !important;
+      }
+    }
+
+    .pr-#{$i} {
+      padding-right: inRem((($i - 1) * $step) + $startSpace);
+      &.important {
+        padding-right: inRem((($i - 1) * $step) + $startSpace) !important;
+      }
+    }
+
+    .pt-#{$i} {
+      padding-top: inRem((($i - 1) * $step) + $startSpace);
+      &.important {
+        padding-top: inRem((($i - 1) * $step) + $startSpace) !important;
+      }
+    }
+
+    .pb-#{$i} {
+      padding-bottom: inRem((($i - 1) * $step) + $startSpace);
+      &.important {
+        padding-bottom: inRem((($i - 1) * $step) + $startSpace) !important;
+      }
+    }
+
+    .m-#{$i} {
+      margin: inRem((($i - 1) * $step) + $startSpace);
+      &.important {
+        margin: inRem((($i - 1) * $step) + $startSpace) !important;
+      }
+    }
+
+    .ml-#{$i} {
+      margin-left: inRem((($i - 1) * $step) + $startSpace);
+      &.important {
+        margin-left: inRem((($i - 1) * $step) + $startSpace) !important;
+      }
+    }
+
+    .mr-#{$i} {
+      margin-right: inRem((($i - 1) * $step) + $startSpace);
+      &.important {
+        margin-right: inRem((($i - 1) * $step) + $startSpace) !important;
+      }
+    }
+
+    .mt-#{$i} {
+      margin-top: #{((($i - 1) * $step) + $startSpace)}px;
+      &.important {
+        margin-top: inRem((($i - 1) * $step) + $startSpace) !important;
+      }
+    }
+
+    .mb-#{$i} {
+      margin-bottom: inRem((($i - 1) * $step) + $startSpace);
+      &.important {
+        margin-bottom: inRem((($i - 1) * $step) + $startSpace) !important;
+      }
+    }
+  }
+
+  @include small {
+    @include atomicPaddingsAndMargins($i,sm);
+  }
+  @include medium {
+    @include atomicPaddingsAndMargins($i,md);
+  }
+  @include large {
+    @include atomicPaddingsAndMargins($i,lg);
+  }
+  @include xlarge {
+    @include atomicPaddingsAndMargins($i,xlg);
+  }
+  @include xxlarge {
+    @include atomicPaddingsAndMargins($i,xxlg);
+  }
+
+}

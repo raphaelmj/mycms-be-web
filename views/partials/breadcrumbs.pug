@@ -1,0 +1,8 @@
+.breadcrumbs.flex.flex-align-center.mb-5.w-100(class="border-bottom-"+pageColor.alias)
+    ul.flex.flex-align-center.flex-wrap(class="link-on-color-"+pageColor.alias+" on-breadcrumbs font-on-color-"+pageColor.alias)
+        each breadcrumb in breadcrumbs
+          li.flex.flex-align-center(class=((breadcrumb.asLink)?"linked":""))
+            if (breadcrumb.asLink)
+                a(href=breadcrumb.path) #{breadcrumb.title}
+            else
+                | #{breadcrumb.title}

@@ -1,0 +1,33 @@
+.press-office
+    .equal-grid.columns-1.columns-medium-2.columns-large-2.spaces-5
+        .column
+            +contactGroups(contactGroups, 2, false)
+        .column
+            each office in departmentOffices
+                h3.office-title.on-white(class="font-on-color-" + pageColor.alias) #{office.data.title}
+                h4.sub-title.on-white.mb-2(class="font-on-color-" + pageColor.alias) #{office.data.subTitle}
+                .address-cloud !{office.data.address}
+                .phones.mt-2.mb-2
+                    each p in [...office.data.phones]
+                        .phone-el.link-el
+                            a(href="tel:" + p) #{p}
+                .emails.mt-2.mb-2
+                    each p in [...office.data.emails]
+                        .email-el.link-el
+                            a(href="mailto:" + p) #{p}
+                +openHours(office.data.hours, pageColor)
+                if (office.data.mapFiles.moreFile && office.data.mapFiles.lessFile)
+                    .map
+                        style.
+                            .office-map-press {
+                                background: url(#{office.data.mapFiles.lessFile}) center top no-repeat;
+                                background-size: auto 360px;
+                            }
+
+                            @media (max-width: 991.98px) {
+                                .office-map-press {
+                                    background-size: auto 420px;
+                                }
+                            }
+                        .office-map.office-map-press.click-open(data-size=office.data.mapFiles.moreFile.sizeString data-image-src=office.data.mapFiles.moreFile.src)
+

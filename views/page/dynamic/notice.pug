@@ -1,0 +1,50 @@
+extends ../../layouts/page
+block page-content
+    - const notice = data.dynamicData.notice.noticeData;
+    .content.pt-6.pb-6(class=((containerType === 'with-left') ? 'container-small default-align' : '') id=alias)
+        include ../../partials/breadcrumbs
+        h2.page-title.on-white.with-arrows.mb-2.important(class="font-on-color-"+pageColor.alias+" arrows-"+pageColor.alias) #{parentPage.title}
+        .notice.pb-12
+            h2.notice-title.on-white.mb-2(class="font-on-color-"+pageColor.alias) #{notice.name}
+            .row-notice.mb-2
+                if (notice.krs && notice.krs != '')
+                    span.label.on-white(class="font-on-color-"+pageColor.alias) KRS:
+                    =" "
+                    span.data.on-white(class="font-on-color-"+pageColor.alias) #{notice.krs}
+                if (notice.nip && notice.nip != '')
+                    =";  "
+                    span.label.on-white(class="font-on-color-"+pageColor.alias) NIP:
+                    =" "
+                    span.data.on-white(class="font-on-color-"+pageColor.alias) #{notice.nip}
+                if (notice.regon && notice.regon != '')
+                    =";  "
+                    span.label.on-white(class="font-on-color-"+pageColor.alias) REGON:
+                    =" "
+                    span.data.on-white(class="font-on-color-"+pageColor.alias) #{notice.regon}
+            if (notice.court && notice.court != '')
+                .row-notice.mb-2
+                    .info
+                        span.label.on-white(class="font-on-color-"+pageColor.alias) SĄD REJESTROWY:
+                        =" "
+                        span.data.on-white(class="font-on-color-"+pageColor.alias) #{notice.court}
+            if (notice.capital && notice.capital != '')
+                .row-notice.mb-2
+                    .info
+                        span.label.on-white(class="font-on-color-"+pageColor.alias) KAPITAŁ ZAKŁADOWY:
+                        =" "
+                        span.data.on-white(class="font-on-color-"+pageColor.alias) #{notice.capital}
+            if (notice.place && notice.place != '')
+                .row-notice.mb-12.mt-12
+                    .info
+                        span.label.on-white(class="font-on-color-"+pageColor.alias) SEDZIBA:
+                        =" "
+                        span.data.on-white(class="font-on-color-"+pageColor.alias) #{notice.place}
+            if (notice.description && notice.description != '')
+                .row-notice.description.mb-2.on-white(class="font-on-color-"+pageColor.alias)
+                    | !{notice.description}
+            if (notice.linkedInfo && notice.linkedInfo.length > 0)
+                .row-notice.mt-6
+                    each link in notice.linkedInfo
+                        .link
+                            a(href=link.link target="_blank" class="link-"+pageColor.alias) #{link.name}
+
